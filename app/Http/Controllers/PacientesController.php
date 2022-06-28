@@ -23,14 +23,15 @@ class PacientesController extends Controller
         public function graficar(Paciente $pacientes)
         {
             $datos = $pacientes;
+            $registro_pulsera = Registro_pulsera::where('id','=','1')->get();
             //$registro_pulsera = registro_pulsera::select('registro_pulsera')->WHERE('id_pacientePersonalizada', $datos->id_pacientePersonalizada);
             /*$registro_pulsera = Pacientes::select("SELECT * FROM registro_pulsera 
             WHERE id_pacientePersonalizada = ? ", $datos->id_pacientePersonalizada); */
             //$datos_pulsera = $registro_pulsera;
-            return view('grafica', ['datos' => $datos]);
+                    //return view('grafica', ['datos' => $datos]);
             //$registro_pulsera = registro_pulsera::where('id_pacientePersonalizada','=',$datos->id_pacientePersonalizada);
             //$registro_pulsera = Registro_pulsera::find($datos->id_pacientePersonalizada);
-            //return $registro_pulsera;
+            return $registro_pulsera;
             //return $datos;
         }
     
