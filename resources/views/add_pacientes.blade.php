@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-sm-10 max_auto">
                     <div class="row col-md-10 conteiner">
-                        <form class="row" action=" {{ route('pacientes.store') }} " method="POST">
+                        <form class="row" action=" {{ route('pacientes.store') }} " method="POST"><!--  route('pacientes.store')-->
                             <div class="col">
                                 <input placeholder="Nombre" name="nombre_p" value="{{ old('nombre_p') }}">
                             </div>

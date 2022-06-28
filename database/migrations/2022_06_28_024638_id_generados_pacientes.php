@@ -16,6 +16,7 @@ class IdGeneradosPacientes extends Migration
         Schema::create('id_generados_pacientes', function (Blueprint $table) {
             $table->id();
             $table->string('id_pacientePersonalizada');
+            //$table->foreign('id_pacientePersonalizadaF')->references('id')->on('users');
             $table->string('id_paciente');
             $table->timestamps();
         });

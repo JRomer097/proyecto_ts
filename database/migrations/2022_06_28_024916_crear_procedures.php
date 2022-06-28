@@ -58,21 +58,23 @@ class CrearProcedures extends Migration
         DB::unprepared('CREATE PROCEDURE actualizar_id_pacientePersonalizado(
             )
             BEGIN
-                DECLARE id_personalizada VARCHAR(50);
-                DECLARE id_pacienteRegistro VARCHAR(50);
-                DECLARE id_registro INT(10);
-                SELECT id, id_pacientePersonalizada FROM pacientes WHERE id_pacientePersonalizada IS NULL LIMIT 1 INTO id_registro, id_pacienteRegistro;
-                IF (id_registro IS NOT NULL) THEN
-                    WHILE (id_registro IS NOT NULL) DO
-                        SET id_personalizada = (SELECT id_pacientePersonalizada FROM id_generados_pacientes WHERE id_paciente = id_registro);
-                        UPDATE pacientes SET id_pacientePersonalizada = id_personalizada WHERE id = id_registro;
-                        SELECT id, id_pacientePersonalizada FROM pacientes WHERE id_pacientePersonalizada IS NULL LIMIT 1 INTO id_registro, id_pacienteRegistro;
-                        IF (id_registro IS NOT NULL)THEN
-                            SET id_registro = NULL ;
-                        END IF;
-                    END WHILE;
+              DECLARE contador_inicio INT(10);
+              DECLARE contador_c INT(10);
+              DECLARE id_personalizada VARCHAR(50);
+              DECLARE id_pacienteRegistro VARCHAR(50);
+              DECLARE id_registro INT(10);
+              DECLARE id_nada VARCHAR(50);
+              SELECT COUNT(id) FROM pacientes WHERE id_pacientePersonalizada IS NULL INTO contador_inicio;
+              SET contador_c = 0;
+                IF (contador_inicio > 0 ) THEN
+                  WHILE (contador_c <= contador_inicio) DO
+                    SELECT id, id_pacientePersonalizada FROM pacientes WHERE id_pacientePersonalizada IS NULL LIMIT 1 INTO id_registro, id_pacienteRegistro;
+                    SET id_personalizada = (SELECT id_pacientePersonalizada FROM id_generados_pacientes WHERE id_paciente = id_registro);
+                    UPDATE pacientes SET id_pacientePersonalizada = id_personalizada WHERE id = id_registro;
+                    SET contador_c = contador_c + 1;
+                  END WHILE;
                 END IF;
-            END');
+                END');
         
     }
 

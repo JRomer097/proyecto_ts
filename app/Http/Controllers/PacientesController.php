@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Registro_pulsera;
+use DB;
 
 class PacientesController extends Controller
 {
@@ -15,6 +16,7 @@ class PacientesController extends Controller
             return view('add_pacientes', [
                 'pacientes' => $pacientes
             ]);
+            //return view('welcome');
         }
     
         //Ventana para graficar la informacion del paciente
@@ -86,7 +88,7 @@ class PacientesController extends Controller
                 'altura' => $request -> altura,
                 'tipo_de_sangre' => $request -> tipo_de_sangre
             ]);
-            $update_id_paciente = Paciente::select("CALL actualizar_id_pacientePersonalizado()");
+            $update_id_paciente = DB::select('CALL actualizar_id_pacientePersonalizado()');
             return back();
         }
     

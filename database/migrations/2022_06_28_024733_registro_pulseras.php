@@ -33,6 +33,6 @@ class RegistroPulseras extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registro_pulsera');
+        Schema::dropIfExists('registro_pulseras');
     }
 }

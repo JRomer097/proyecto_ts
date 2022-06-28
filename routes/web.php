@@ -32,3 +32,18 @@ Route::post('pacientes', [PacientesController::class, 'store'])->name('pacientes
 
 //Borrar un paciente
 Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->name('pacientes.delete');
+
+//Resource
+//Route::resource('/', PacientesController::class);
+
+
+/*
+Route::get('eloquen', function(){
+    $posts = Post::where('id','>=','20')
+    ->orderBy('id','desc')
+    ->take(3)
+    ->get();
+    foreach($posts as $post){
+        echo "$post->id $post->title <br>";
+    }
+});*/
