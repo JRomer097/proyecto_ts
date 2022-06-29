@@ -17,44 +17,43 @@ class CrearProcedures extends Migration
                         DROP PROCEDURE IF EXISTS llenar_hora;');
         DB::unprepared('CREATE PROCEDURE llenar_hora()  
         BEGIN
-          DECLARE texto VARCHAR(10);
-          DECLARE texto2 VARCHAR(10);
-          DECLARE contador INT(10);
-          DECLARE id2 INT(10);
-          DECLARE horat INT(10);
-          DECLARE minuto INT(10);
-          DECLARE tiempo VARCHAR(10);
-          SET contador = 1;
-          SET horat = 0;
-          SET minuto = 0;
-          SET id2 = 1;
-          WHILE (contador <= 61 ) DO
-            WHILE (horat <= 23 ) DO
-              IF horat <= 9 THEN
-                SET texto2 = CONCAT("0",horat);
-              ELSE
-                SET texto2 = horat;
-              END IF;
-              WHILE (minuto <= 50 ) DO
-                  IF minuto = 0 THEN
-                    SET texto = CONCAT("0", minuto);
-                    SET tiempo = CONCAT(texto2,":",texto);
-                    UPDATE registro_pulsera SET hora = tiempo WHERE id = id2;
-                  ELSE
-                    SET tiempo = CONCAT(texto2,":",minuto);
-                    UPDATE registro_pulsera SET hora = tiempo WHERE id = id2;
-                  END IF;
-                  SET id2 = id2 + 1;
-                  SET minuto = minuto + 10;
-              END WHILE;
-              SET minuto = 0;
-              SET horat = horat + 1;
+    DECLARE minuto_t VARCHAR(10);
+    DECLARE hora_t VARCHAR(10);
+    DECLARE contador INT(10);
+    DECLARE id2 INT(10);
+    DECLARE hora_cont INT(10);
+    DECLARE minuto_cont INT(10);
+    DECLARE tiempo VARCHAR(10);
+    SET contador = 1;
+    SET hora_cont = 0;
+    SET minuto_cont = 0;
+    SET id2 = 1;
+    WHILE (contador <= 61 ) DO
+        WHILE (hora_cont <= 23 ) DO
+            IF hora_cont <= 9 THEN
+                SET hora_t = CONCAT("0",hora_cont);
+            ELSE
+                SET hora_t = hora_cont;
+            END IF;
+            WHILE (minuto_cont <= 50 ) DO
+                IF minuto_cont = 0 THEN
+                    SET minuto_t = CONCAT("0", minuto_cont);
+                    SET tiempo = CONCAT(hora_t,":",minuto_t);
+                    UPDATE registro_pulseras SET hora = tiempo WHERE id = id2;
+                ELSE
+                    SET tiempo = CONCAT(hora_t,":",minuto_cont);
+                    UPDATE registro_pulseras SET hora = tiempo WHERE id = id2;
+                END IF;
+                SET id2 = id2 + 1;
+                SET minuto_cont = minuto_cont + 10;
             END WHILE;
-            SET horat = 0;
+            SET minuto_cont = 0;
+            SET hora_cont = hora_cont + 1;
+        END WHILE;
+            SET hora_cont = 0;
             SET contador = contador + 1;
-          END WHILE;
-        END
-        ');
+    END WHILE;
+END');
         DB::unprepared('CREATE PROCEDURE actualizar_id_pacientePersonalizado(
             )
             BEGIN

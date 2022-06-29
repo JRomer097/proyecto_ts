@@ -43,6 +43,20 @@
 			<div style="min-height: 495px; background-color: #F3F3F3; min-width: 100%;">	
 				<div>
 					Estado del paciente
+					<div>
+					<br>
+					@foreach ($registro_pulsera as $registro)
+						{{ $registro->id }}
+						{{ $registro->id_pacientePersonalizada }}
+						{{ $registro->id_pulsera }}
+						{{ $registro->fecha }}
+						{{ $registro->hora }}
+						{{ $registro->temperatura }}
+						{{ $registro->pulso_cardiaco }}
+						{{ $registro->oxi_sangre }}
+						<br>
+					@endforeach
+					</div>
 				</div>
 			</div>
 		</div>

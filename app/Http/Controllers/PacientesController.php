@@ -9,6 +9,11 @@ use DB;
 
 class PacientesController extends Controller
 {
+        public function vista()
+        {
+            return view('desing');
+        }
+
         //Mandamos y mostramos la información de la DB
         public function index()
         {
@@ -23,16 +28,28 @@ class PacientesController extends Controller
         public function graficar(Paciente $pacientes)
         {
             $datos = $pacientes;
-            $registro_pulsera = Registro_pulsera::where('id','=','1')->get();
-            //$registro_pulsera = registro_pulsera::select('registro_pulsera')->WHERE('id_pacientePersonalizada', $datos->id_pacientePersonalizada);
-            /*$registro_pulsera = Pacientes::select("SELECT * FROM registro_pulsera 
-            WHERE id_pacientePersonalizada = ? ", $datos->id_pacientePersonalizada); */
-            //$datos_pulsera = $registro_pulsera;
+
+            $subquery = Registro_pulsera::where('id_pacientePersonalizada', '=', $datos->id_pacientePersonalizada)
+            ->where('fecha','=','2021-06-7')->max('pulso_cardiaco') ;
+            
+            //$subquery = Registro_pulsera::whereRaw('pulso_cardiaco = (SELECT MAX(pulso_cardiaco) FROM registro_pulseras)');
+            $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $subquery)
+            ->where('id_pacientePersonalizada', '=', $datos->id_pacientePersonalizada)
+            ->where('fecha','=','2021-06-7')->get();
                     //return view('grafica', ['datos' => $datos]);
-            //$registro_pulsera = registro_pulsera::where('id_pacientePersonalizada','=',$datos->id_pacientePersonalizada);
-            //$registro_pulsera = Registro_pulsera::find($datos->id_pacientePersonalizada);
-            return $registro_pulsera;
-            //return $datos;
+            /*  SELECT * FROM registro_pulseras 
+                WHERE pulso_cardiaco = (SELECT MAX(pulso_cardiaco) FROM registro_pulseras 
+                WHERE id_pacientePersonalizada = 'P00001'
+                AND fecha = '2021-06-7')
+                AND id_pacientePersonalizada = 'P00001' AND fecha = '2021-06-7'; */
+            //dd($registro_pulsera->toArray());    
+            //dd($subquery->toJson());
+            //return $subquery;
+            //dd($datos->id_pacientePersonalizada);
+            return view('grafica', [
+                'datos' => $datos,
+                'registro_pulsera'=>$registro_pulsera
+            ]);
         }
     
         //Ventana para editar los datos del paciente

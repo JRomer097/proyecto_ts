@@ -18,7 +18,7 @@ class RegistroPulseras extends Migration
             $table->string('id_pacientePersonalizada');
             $table->string('id_pulsera');
             $table->string('fecha');
-            $table->string('hora');
+            $table->string('hora')->nullable();
             $table->double('temperatura');
             $table->integer('pulso_cardiaco');
             $table->integer('oxi_sangre');
