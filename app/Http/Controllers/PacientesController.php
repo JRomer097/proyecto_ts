@@ -21,34 +21,14 @@ class PacientesController extends Controller
             return view('add_pacientes', [
                 'pacientes' => $pacientes
             ]);
-            //return view('welcome');
         }
     
         //Ventana para graficar la informacion del paciente
         public function graficar(Paciente $pacientes)
         {
             $datos = $pacientes;
-
-            $subquery = Registro_pulsera::where('id_pacientePersonalizada', '=', $datos->id_pacientePersonalizada)
-            ->where('fecha','=','2021-06-7')->max('pulso_cardiaco') ;
-            
-            //$subquery = Registro_pulsera::whereRaw('pulso_cardiaco = (SELECT MAX(pulso_cardiaco) FROM registro_pulseras)');
-            $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $subquery)
-            ->where('id_pacientePersonalizada', '=', $datos->id_pacientePersonalizada)
-            ->where('fecha','=','2021-06-7')->get();
-                    //return view('grafica', ['datos' => $datos]);
-            /*  SELECT * FROM registro_pulseras 
-                WHERE pulso_cardiaco = (SELECT MAX(pulso_cardiaco) FROM registro_pulseras 
-                WHERE id_pacientePersonalizada = 'P00001'
-                AND fecha = '2021-06-7')
-                AND id_pacientePersonalizada = 'P00001' AND fecha = '2021-06-7'; */
-            //dd($registro_pulsera->toArray());    
-            //dd($subquery->toJson());
-            //return $subquery;
-            //dd($datos->id_pacientePersonalizada);
             return view('grafica', [
-                'datos' => $datos,
-                'registro_pulsera'=>$registro_pulsera
+                'datos' => $datos
             ]);
         }
     

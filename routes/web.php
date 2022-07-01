@@ -36,7 +36,7 @@ Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->
 //Resource
 //Route::resource('/', PacientesController::class);
 
-Route::get('vista', [PacientesController::class, 'vista']);
+Route::get('vista', [RegistroPulserasController::class, 'vista']);
 /*
 Route::get('eloquen', function(){
     $posts = Post::where('id','>=','20')
