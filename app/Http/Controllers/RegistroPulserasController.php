@@ -19,6 +19,7 @@ class RegistroPulserasController extends Controller
         $registro = Registro_pulsera::where(
             'id_pacienteFk', '=', 'P00001')
             ->where('fecha','=','2021-06-7')->get();
+ 
 
         $data_temp = [];
         $data_car = [];
@@ -49,6 +50,7 @@ class RegistroPulserasController extends Controller
         $data_oxi['data_oxi'] = json_encode($data_oxi);
 
         return view('desing', $data_temp, $data_car, $data_oxi);         
+        
         //dd($data);  
 
     }

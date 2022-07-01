@@ -62,23 +62,32 @@
             </div>
             <div class="row container align-items-center" style="height: 50%;">
                 <div class = "col-sm-12 text-center">
-					Temperatura
-                    @foreach($registro_pulsera as $registro)
-                        {{ $registro -> temperatura }} 
-                    @endforeach
+                    <span>Temperatura: </span>
+                    <p>
+                        @foreach($registro_pulsera as $registro)
+                            {{ $registro -> temperatura }} 
+                        @endforeach
+                    </p>
 				</div>
+
                 <div class = "col-sm-12 text-center">
-                    Pulso Cardiaco
-                    @foreach($registro_pulsera as $registro)
-                        {{ $registro -> pulso_cardiaco }}
-                    @endforeach
+                    <span>Pulso Cardiaco: </span>
+                    <p>
+                        @foreach($registro_pulsera as $registro)
+                            {{ $registro -> pulso_cardiaco }}
+                        @endforeach
+                    </p>
 				</div>
-                <div class = "col-sm-12 text-center">
-					Oxigenacion en la sangre
-                    @foreach($registro_pulsera as $registro)
-                        {{ $registro -> oxi_sangre }}
-                    @endforeach
+
+                <div class = "col-sm-12 text-center ">
+                    <span>Oxigenacion en la sangre: </span>
+                    <p>
+                        @foreach($registro_pulsera as $registro)
+                            {{ $registro -> oxi_sangre }}
+                        @endforeach
+                    </p>
 				</div>
+
             </div>
         </div>
     </div>

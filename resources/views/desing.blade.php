@@ -64,7 +64,6 @@
                 });
                 </script>
     </div>
-
     <div class="container" style="max-width: 800px; max-height: 800px;">
             <canvas id="chartCardio" width="600" height="500"></canvas>
                 <script>
@@ -117,5 +116,6 @@
                 });
                 </script>
     </div>
+
 </body>
 </html>
