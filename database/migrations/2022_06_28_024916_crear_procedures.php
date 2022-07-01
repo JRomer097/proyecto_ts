@@ -63,13 +63,13 @@ END');
               DECLARE id_pacienteRegistro VARCHAR(50);
               DECLARE id_registro INT(10);
               DECLARE id_nada VARCHAR(50);
-              SELECT COUNT(id) FROM pacientes WHERE id_pacientePersonalizada IS NULL INTO contador_inicio;
+              SELECT COUNT(id) FROM pacientes WHERE id_paciente IS NULL INTO contador_inicio;
               SET contador_c = 0;
                 IF (contador_inicio > 0 ) THEN
                   WHILE (contador_c <= contador_inicio) DO
-                    SELECT id, id_pacientePersonalizada FROM pacientes WHERE id_pacientePersonalizada IS NULL LIMIT 1 INTO id_registro, id_pacienteRegistro;
-                    SET id_personalizada = (SELECT id_pacientePersonalizada FROM id_generados_pacientes WHERE id_paciente = id_registro);
-                    UPDATE pacientes SET id_pacientePersonalizada = id_personalizada WHERE id = id_registro;
+                    SELECT id, id_paciente FROM pacientes WHERE id_paciente IS NULL LIMIT 1 INTO id_registro, id_pacienteRegistro;
+                    SET id_personalizada = (SELECT id_pacientePersonalizada FROM id_generados_pacientes WHERE id_pacienteFk = id_registro);
+                    UPDATE pacientes SET id_paciente = id_personalizada WHERE id = id_registro;
                     SET contador_c = contador_c + 1;
                   END WHILE;
                 END IF;

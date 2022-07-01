@@ -17,7 +17,7 @@ class IdGeneradosPacientes extends Migration
             $table->id();
             $table->string('id_pacientePersonalizada');
             //$table->foreign('id_pacientePersonalizadaF')->references('id')->on('users');
-            $table->string('id_paciente');
+            $table->string('id_pacienteFk');
             $table->timestamps();
         });
     }

@@ -23,4 +23,9 @@ class Paciente extends Model
         'altura',
         'tipo_de_sangre'
     ];
+
+    public function registro()
+    {
+        return $this-> hasMany(Registro_pulsera::class);
+    }
 }

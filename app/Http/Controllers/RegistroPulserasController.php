@@ -16,19 +16,39 @@ class RegistroPulserasController extends Controller
         ->where('id_pacientePersonalizada', '=', 'P00001')
         ->where('fecha','=','2021-06-7')->get();*/
 
-        $registro_pulsera = Registro_pulsera::where(
-            'id_pacientePersonalizada', '=', 'P00001')
+        $registro = Registro_pulsera::where(
+            'id_pacienteFk', '=', 'P00001')
             ->where('fecha','=','2021-06-7')->get();
 
-        $data = [];
-        foreach($registro_pulsera as $registro)
-        {
-            $data['label'][] = $registro->hora;
-            $data['data'][] = $registro->temperatura;
-        }
-        $data['data'] = json_encode($data);
+        $data_temp = [];
+        $data_car = [];
+        $data_oxi = [];
 
-        return view('desing', $data);         
+        foreach($registro as $registro_temperatura)
+        {
+            $data_temp['label_hora'][] = $registro_temperatura->hora;
+            $data_temp['data_temperatura'][] = $registro_temperatura->temperatura;
+        }
+
+        $data_temp['data_temp'] = json_encode($data_temp);
+        
+        foreach($registro as $registro_cardiaco)
+        {
+            $data_car['label_hora'][] = $registro_cardiaco->hora;
+            $data_car['data_pulso_cardiaco'][] = $registro_cardiaco->pulso_cardiaco;
+        }
+
+        $data_car['data_car'] = json_encode($data_car);
+
+        foreach($registro as $registro_oxigeno)
+        {
+            $data_oxi['label_hora'][] = $registro_oxigeno->hora;
+            $data_oxi['data_oxi_sangre'][] = $registro_oxigeno->oxi_sangre;
+        }
+
+        $data_oxi['data_oxi'] = json_encode($data_oxi);
+
+        return view('desing', $data_temp, $data_car, $data_oxi);         
         //dd($data);  
 
     }

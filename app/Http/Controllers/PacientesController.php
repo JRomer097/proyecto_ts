@@ -26,10 +26,21 @@ class PacientesController extends Controller
         //Ventana para graficar la informacion del paciente
         public function graficar(Paciente $pacientes)
         {
+            $subquery = Registro_pulsera::where('id_pacienteFk', '=', $pacientes -> id_paciente )
+            ->where('fecha','=','2021-06-7')->max('pulso_cardiaco');
+            
+            $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $subquery)
+            ->where('id_pacienteFk', '=', $pacientes -> id_paciente)
+            ->where('fecha','=','2021-06-7')->limit(1)->get();
+
             $datos = $pacientes;
+
             return view('grafica', [
-                'datos' => $datos
+                'datos' => $datos,
+                'registro_pulsera' => $registro_pulsera
             ]);
+
+            //dd($registro_pulsera);
         }
     
         //Ventana para editar los datos del paciente

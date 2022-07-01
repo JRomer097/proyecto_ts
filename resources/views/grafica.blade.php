@@ -60,9 +60,24 @@
                     <button type="button" class="btn btn-outline-success" style="padding: 40px 20px;">30</button>
                 </div>
             </div>
-            <div class="" style="height: 50%;">
-                <div>
-					Estado del paciente
+            <div class="row container align-items-center" style="height: 50%;">
+                <div class = "col-sm-12 text-center">
+					Temperatura
+                    @foreach($registro_pulsera as $registro)
+                        {{ $registro -> temperatura }} 
+                    @endforeach
+				</div>
+                <div class = "col-sm-12 text-center">
+                    Pulso Cardiaco
+                    @foreach($registro_pulsera as $registro)
+                        {{ $registro -> pulso_cardiaco }}
+                    @endforeach
+				</div>
+                <div class = "col-sm-12 text-center">
+					Oxigenacion en la sangre
+                    @foreach($registro_pulsera as $registro)
+                        {{ $registro -> oxi_sangre }}
+                    @endforeach
 				</div>
             </div>
         </div>
