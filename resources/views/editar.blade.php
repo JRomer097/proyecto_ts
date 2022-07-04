@@ -8,42 +8,45 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    <div>
-        <form action="{{ route('pacientes.update', $datos) }}">
-            @method('PACTH')
-            <div>
-                <label for="">Nombre: </label>
-                <input name="nombre_p" value="{{ $datos->nombre_p }}">
-            </div>
-            <div>
-                <label for="">Apellido Paterno: </label>
-                <input name="apellidoP_p" value="{{ $datos->apellidoP_p }}">
-            </div>
-            <div>
-                <label for="">Apellido Materno: </label>
-                <input name="apellidoM_p" value="{{ $datos->apellidoM_p }}">
-            </div>
-            <div>
-                <label for="">Edad: </label>
-                <input name="edad" value="{{ $datos->edad }}">
-            </div>
-            <div>
-                <label for="">Peso: </label>
-                <input name="peso" value="{{ $datos->peso }}">
-            </div>
-            <div>
-                <label for="">Altura: </label>
-                <input name="altura" value="{{ $datos->altura }}">
-            </div>
-            <div>
-                <label for="">Tipo de sangre: </label>
-                <input name="tipo_de_sangre" value="{{ $datos->tipo_de_sangre }}">
-            </div>
-            <div>
-                @csrf
-                <input type="submit" value="Guardar">
-            </div>
-        </form>
+    <div class="container row">
+        <div class="col-sm-2">
+            <form action="{{ route('pacientes.update', $datos) }}">
+                @method('PACTH')
+                <div>
+                    <label for="" class="form-label">Nombre: </label>
+                    <input name="nombre" value="{{ $datos->nombre }}" class="form-control">
+                </div>  
+                <div>
+                    <label for="" class="form-label">Apellido Paterno: </label>
+                    <input name="apellido_paterno" value="{{ $datos->apellido_paterno }}" class="form-control">
+                </div>
+                <div>
+                    <label for="" class="form-label">Apellido Materno: </label>
+                    <input name="apellido_materno" value="{{ $datos->apellido_materno }}" class="form-control">
+                </div>
+                <div>
+                    <label for="" class="form-label">Edad: </label>
+                    <input name="edad" value="{{ $datos->edad }}" class="form-control">
+                </div>
+                <div>
+                    <label for="" class="form-label">Peso: </label>
+                    <input name="peso" value="{{ $datos->peso }}" class="form-control">
+                </div>
+                <div>
+                    <label for="" class="form-label">Altura: </label>
+                    <input name="altura" value="{{ $datos->altura }}" class="form-control">
+                </div>
+                <div>
+                    <label for="" class="form-label">Tipo de sangre: </label>
+                    <input name="tipo_de_sangre" value="{{ $datos->tipo_de_sangre }}" class="form-control">
+                </div>
+                <div>
+                    @csrf
+                    <input type="submit" value="Guardar" class="form-control">
+                </div>
+            </form>
+        </div>
+
     </div>
 </body>
 </html>

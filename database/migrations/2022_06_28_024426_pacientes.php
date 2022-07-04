@@ -15,10 +15,9 @@ class Pacientes extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->string('id_paciente')->nullable()->unique();
-            $table->string('nombre_p', 50);
-            $table->string('apellidoP_p', 50);
-            $table->string('apellidoM_p', 50);
+            $table->string('nombre', 50);
+            $table->string('apellido_paterno', 50);
+            $table->string('apellido_materno', 50);
             $table->integer('edad');
             $table->double('peso', 3);
             $table->double('altura', 1);

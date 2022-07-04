@@ -17,7 +17,7 @@ class RegistroPulserasController extends Controller
         ->where('fecha','=','2021-06-7')->get();*/
 
         $registro = Registro_pulsera::where(
-            'id_pacienteFk', '=', 'P00001')
+            'id_paciente', '=', '1')
             ->where('fecha','=','2021-06-7')->get();
  
 

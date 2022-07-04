@@ -14,16 +14,16 @@ class RegistroPulseras extends Migration
     public function up()
     {
         Schema::create('registro_pulseras', function (Blueprint $table) {
-            $table->id();
-            $table->string('id_pacienteFk')->nullable();//->unsigned()
+            $table->bigIncrements('id');
+            $table->bigInteger('id_paciente')->unsigned();
             $table->string('id_pulsera');
             $table->date('fecha');
             $table->string('hora')->nullable();
             $table->double('temperatura');
             $table->integer('pulso_cardiaco');
-            $table->integer('oxi_sangre');
+            $table->integer('oxigeno_sangre');
             $table->timestamps();
-            //$table->foreign('id_pacienteFk')->references('id_paciente')->on('pacientes');
+            $table->foreign('id_paciente')->references('id')->on('pacientes');
         });
     }
 

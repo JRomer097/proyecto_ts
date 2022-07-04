@@ -20,7 +20,7 @@
                 <div class="col-sm-8 row container">
                     <div class="col-sm-8">
                         <span>Nombre: </span>
-                        <p> {{ $datos->nombre_p }} </p>
+                        <p> {{ $datos->nombre }} </p>
                     </div>
                     <!-- <div class="w-100"></div> --> 
 

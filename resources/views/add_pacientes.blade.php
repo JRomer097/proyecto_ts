@@ -29,13 +29,13 @@
                     <div class="row col-md-10 conteiner">
                         <form class="row" action=" {{ route('pacientes.store') }} " method="POST"><!--  route('pacientes.store')-->
                             <div class="col">
-                                <input placeholder="Nombre" name="nombre_p" value="{{ old('nombre_p') }}">
+                                <input placeholder="Nombre" name="nombre" value="{{ old('nombre') }}">
                             </div>
                             <div class="col">
-                                <input placeholder="Apellido Paterno" name="apellidoP_p" value="{{ old('apellidoP_p') }}">
+                                <input placeholder="Apellido Paterno" name="apellido_paterno" value="{{ old('apellido_paterno') }}">
                             </div>
                             <div class="col">
-                                <input placeholder="Apellido Materno" name="apellidoM_p" value="{{ old('apellidoM_p') }}">
+                                <input placeholder="Apellido Materno" name="apellido_materno" value="{{ old('apellido_materno') }}">
                             </div>
                             <div class="col">
                                 <input placeholder="Edad" name="edad" value="{{ old('edad') }}">
@@ -81,9 +81,9 @@
                         <tbody>
                             @foreach ($pacientes as $pas)
                             <tr>
-                                <td> {{$pas->nombre_p}} </td>
-                                <td> {{$pas->apellidoP_p}} </td>
-                                <td> {{$pas->apellidoM_p}} </td>
+                                <td> {{$pas->nombre}} </td>
+                                <td> {{$pas->apellido_paterno}} </td>
+                                <td> {{$pas->apellido_materno}} </td>
                                 <td> {{$pas->edad}} </td>
                                 <td> {{$pas->peso}}kg </td>
                                 <td> {{$pas->altura}}m </td>
