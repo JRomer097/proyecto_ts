@@ -10,7 +10,15 @@
 <body>
     <div class="row g-0" style="background-color: #FFCCCC; min-height: 657px ;">
         <div class="col-sm-8 col-md-8" style="background-color: #CCFFE6;">
-            Graficas
+            <form action="{{ route('pacientes.index') }}">
+                <input type="submit" 
+                    class="btn btn-outline-success "
+                    style="padding: 40px 20px;"
+                    value="Regresar"
+                    name = "fecha">
+                </input>
+            </form>
+
         </div>
         <div class="col-sm-6 col-md-4 row g-0" style="background-color: #F3F3F3;">
             <div class="container row g-0 " style="height: 30%;">
@@ -50,14 +58,19 @@
                 </div>
                 
             </div>
-            <div class="container align-items-center p-2 " style="height: 20%;">
-                <div class="text-center" data-bs-spy="scroll">
-                    <button type="button" class="btn btn-outline-success" style="padding: 40px 20px;">25</button>
-                    <button type="button" class="btn btn-outline-success" style="padding: 40px 20px;">26</button>
-                    <button type="button" class="btn btn-outline-success" style="padding: 40px 20px;">27</button>
-                    <button type="button" class="btn btn-outline-success" style="padding: 40px 20px;">28</button>
-                    <button type="button" class="btn btn-outline-success" style="padding: 40px 20px;">29</button>
-                    <button type="button" class="btn btn-outline-success" style="padding: 40px 20px;">30</button>
+            <div class="container align-items-center p-2 overflow-auto" style="height: 20%;">
+                <div class="text-center">
+                    <form action=" {{ route('grafica.graficar_fecha', $datos) }} ">
+                        @foreach($fechas as $fecha)
+                            <input type="submit" 
+                                    class="btn btn-outline-success "
+                                    style="padding: 40px 20px;"
+                                    value=" {{ $fecha -> fecha }} "
+                                    name = "fecha">
+                            </input>
+                        @endforeach
+                    </form>
+
                 </div>
             </div>
             <div class="row container align-items-center" style="height: 50%;">
@@ -83,7 +96,7 @@
                     <span>Oxigenacion en la sangre: </span>
                     <p>
                         @foreach($registro_pulsera as $registro)
-                            {{ $registro -> oxi_sangre }}
+                            {{ $registro -> oxigeno_sangre }}
                         @endforeach
                     </p>
 				</div>

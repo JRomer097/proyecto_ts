@@ -26,6 +26,7 @@ Route::get('pacientes/editar/informacion/{pacientes}', [PacientesController::cla
 
 //Ventana de gráficas
 Route::get('pacientes/graficar/{pacientes}',[PacientesController::class, 'graficar'])->name('grafica.graficar');
+Route::get('pacientes/graficar/fecha/{pacientes}',[PacientesController::class, 'graficar_fecha'])->name('grafica.graficar_fecha');
 
 //Guardar un nuevo paciente
 Route::post('pacientes', [PacientesController::class, 'store'])->name('pacientes.store');

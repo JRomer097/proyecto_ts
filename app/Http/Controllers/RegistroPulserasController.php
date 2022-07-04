@@ -18,7 +18,7 @@ class RegistroPulserasController extends Controller
         ->where('fecha','=','2021-06-7')->get();*/
 
         //
-        $registros = Registro_pulsera::with('paciente')->get();
+        $registros = Registro_pulsera::with('paciente')->where('paciente_id','=', 1)->get();
 
         /*$registro = Registro_pulsera::where(
             'id_paciente', '=', '1')
@@ -55,7 +55,7 @@ class RegistroPulserasController extends Controller
 
         return view('desing', $data_temp, $data_car, $data_oxi);*/  
 
-        dd($registros);
+        return($registros);
 
     }
 }

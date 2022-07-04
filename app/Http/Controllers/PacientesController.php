@@ -26,21 +26,51 @@ class PacientesController extends Controller
         //Ventana para graficar la informacion del paciente
         public function graficar(Paciente $pacientes)
         {
-            $subquery = Registro_pulsera::where('id_paciente', '=', $pacientes -> id)
+            $datos = $pacientes;
+
+            $subquery = Registro_pulsera::where('paciente_id', '=', $pacientes -> id)
             ->where('fecha','=','2021-06-7')->max('pulso_cardiaco');
             
             $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $subquery)
-            ->where('id_paciente', '=', $pacientes -> id)
+            ->where('paciente_id', '=', $pacientes -> id)
             ->where('fecha','=','2021-06-7')->limit(1)->get();
 
-            $datos = $pacientes;
+            //$paciente = $pacientes;
+            //Consultas para las fechas
+            //$registros = Registro_pulsera::with('paciente')->where('paciente_id','=', $pacientes -> id)->get();
+            $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
+            -> groupBy('fecha') -> get();
 
-            return view('grafica', [
+            //return($fechas);
+              return view('grafica', [
                 'datos' => $datos,
-                'registro_pulsera' => $registro_pulsera
+                'registro_pulsera' => $registro_pulsera,
+                'fechas' => $fechas
             ]);
 
+            //dd($registros);
+        }
+
+        public function graficar_fecha(Request $request, Paciente $pacientes)
+        {
+            $datos = $pacientes;
+
+            $subquery = Registro_pulsera::where('paciente_id', '=', $pacientes -> id)
+            ->where('fecha','=', $request -> fecha)->max('pulso_cardiaco');
+            
+            $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $subquery)
+            ->where('paciente_id', '=', $pacientes -> id)
+            ->where('fecha','=', $request -> fecha)->limit(1)->get();
+
+            $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
+            -> groupBy('fecha') -> get();
+
             //dd($registro_pulsera);
+            return view('grafica', [
+                'datos' => $datos,
+                'registro_pulsera' => $registro_pulsera,
+                'fechas' => $fechas
+            ]);
         }
     
         //Ventana para editar los datos del paciente
