@@ -24,7 +24,7 @@ class Paciente extends Model
         'tipo_de_sangre'
     ];
 
-    public function registro()
+    public function registros()
     {
         return $this-> hasMany(Registro_pulsera::class);
     }

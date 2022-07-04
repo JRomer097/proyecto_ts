@@ -15,7 +15,7 @@ class RegistroPulseras extends Migration
     {
         Schema::create('registro_pulseras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_paciente')->unsigned();
+            $table->bigInteger('paciente_id')->unsigned();
             $table->string('id_pulsera');
             $table->date('fecha');
             $table->string('hora')->nullable();
@@ -23,7 +23,7 @@ class RegistroPulseras extends Migration
             $table->integer('pulso_cardiaco');
             $table->integer('oxigeno_sangre');
             $table->timestamps();
-            $table->foreign('id_paciente')->references('id')->on('pacientes');
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
         });
     }
 

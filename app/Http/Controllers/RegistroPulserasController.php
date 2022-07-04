@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Registro_pulsera;
+use App\Models\Paciente;
 
 class RegistroPulserasController extends Controller
 {
@@ -16,7 +17,10 @@ class RegistroPulserasController extends Controller
         ->where('id_pacientePersonalizada', '=', 'P00001')
         ->where('fecha','=','2021-06-7')->get();*/
 
-        $registro = Registro_pulsera::where(
+        //
+        $registros = Registro_pulsera::with('paciente')->get();
+
+        /*$registro = Registro_pulsera::where(
             'id_paciente', '=', '1')
             ->where('fecha','=','2021-06-7')->get();
  
@@ -49,9 +53,9 @@ class RegistroPulserasController extends Controller
 
         $data_oxi['data_oxi'] = json_encode($data_oxi);
 
-        return view('desing', $data_temp, $data_car, $data_oxi);         
-        
-        //dd($data);  
+        return view('desing', $data_temp, $data_car, $data_oxi);*/  
+
+        dd($registros);
 
     }
 }
