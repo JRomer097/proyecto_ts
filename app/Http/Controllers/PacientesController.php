@@ -26,42 +26,63 @@ class PacientesController extends Controller
         //Ventana para graficar la informacion del paciente
         public function graficar(Paciente $pacientes)
         {
+            //datos de x paciente
             $datos = $pacientes;
 
-            $subquery = Registro_pulsera::where('paciente_id', '=', $pacientes -> id)
-            ->where('fecha','=','2021-06-7')->max('pulso_cardiaco');
-            
-            $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $subquery)
-            ->where('paciente_id', '=', $pacientes -> id)
-            ->where('fecha','=','2021-06-7')->limit(1)->get();
+            //obtenemos la fecha mas actual al hacer la primera grafica de x paciente
+            $registro_actual_subquery = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
+            ->max('fecha');
+            $registros_actuales = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
+            -> where('fecha','=',$registro_actual_subquery) ->get();
 
-            //$paciente = $pacientes;
+            //consulta para obtener datos de la fecha mas actual de x paciente
+            $registro_pulsera_subquery = Registro_pulsera::where('paciente_id', '=', $pacientes -> id)
+            ->where('fecha','=', $registro_actual_subquery)->max('pulso_cardiaco');
+            $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $registro_pulsera_subquery)
+            ->where('paciente_id', '=', $pacientes -> id)
+            ->where('fecha','=', $registro_actual_subquery)->limit(1)->get();
+
             //Consultas para las fechas
-            //$registros = Registro_pulsera::with('paciente')->where('paciente_id','=', $pacientes -> id)->get();
             $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
             -> groupBy('fecha') -> get();
 
-            //return($fechas);
-              return view('grafica', [
+
+            $registro = Registro_pulsera::where(
+                'paciente_id', '=', $pacientes -> id)
+                ->where('fecha','=', $registro_actual_subquery)->get();
+     
+    
+            $data_temp = [];
+    
+            foreach($registro as $registro_temperatura)
+            {
+                $data_temp['label_hora'][] = $registro_temperatura->hora;
+                $data_temp['data_temperatura'][] = $registro_temperatura->temperatura;
+                $data_temp['data_pulso_cardiaco'][] = $registro_temperatura->pulso_cardiaco;
+                $data_temp['data_oxi_sangre'][] = $registro_temperatura->oxigeno_sangre;
+            }
+    
+            $data_temp['data_temp'] = json_encode($data_temp);
+
+            //pasamos estas cosultas a la vista grafica
+              return view('grafica', $data_temp, [
                 'datos' => $datos,
                 'registro_pulsera' => $registro_pulsera,
                 'fechas' => $fechas
             ]);
-
-            //dd($registros);
         }
 
         public function graficar_fecha(Request $request, Paciente $pacientes)
         {
             $datos = $pacientes;
-
+            //consulta para obtener datos de x fecha de x paciente
             $subquery = Registro_pulsera::where('paciente_id', '=', $pacientes -> id)
             ->where('fecha','=', $request -> fecha)->max('pulso_cardiaco');
-            
             $registro_pulsera = Registro_pulsera::where('pulso_cardiaco', '=', $subquery)
             ->where('paciente_id', '=', $pacientes -> id)
             ->where('fecha','=', $request -> fecha)->limit(1)->get();
 
+            //Consultas para las fechas
             $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
             -> groupBy('fecha') -> get();
 
