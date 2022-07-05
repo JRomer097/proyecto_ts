@@ -21,26 +21,26 @@
 </head>
 <body>
     <div class="row g-0" style="background-color: #FFCCCC; min-height: 657px ;">
-        <div class="col-sm-8 col-md-8" style="background-color: #CCFFE6;">
+        <div class="col-sm-8" style="background-color: #CCFFE6;">
+            <div class="container" style="max-width: 500px; max-height: 500px;">
+                <canvas id="myChart" width="1000px" height="1000px"></canvas>
+            </div>
+
+            <div class="container" style="max-width: 500px; max-height: 500px;">
+                <canvas id="myChart2" width="600px" height="500px"></canvas>
+            </div>
+
+            <div class="container" style="max-width: 500px; max-height: 500px;">
+                <canvas id="myChart3" width="600px" height="500px"></canvas>
+            </div>
             <form action="{{ route('pacientes.index') }}">
                 <input type="submit" 
                     class="btn btn-outline-success "
-                    style="padding: 40px 20px;"
+                    style="padding: 20px 10px;"
                     value="Regresar"
                     name = "fecha">
                 </input>
             </form>
-            <div class="container" style="max-width: 600px; max-height: 600px;">
-                <canvas id="myChart" width="600" height="500"></canvas>
-            </div>
-
-            <div class="container" style="max-width: 600px; max-height: 600px;">
-                <canvas id="myChart2" width="600" height="500"></canvas>
-            </div>
-
-            <div class="container" style="max-width: 600px; max-height: 600px;">
-                <canvas id="myChart3" width="600" height="500"></canvas>
-            </div>
         </div>
         <div class="col-sm-6 col-md-4 row g-0" style="background-color: #F3F3F3;">
             <div class="container row g-0 " style="height: 30%;">
@@ -99,7 +99,7 @@
                 <div class = "col-sm-12 text-center">
                     <span>Temperatura: </span>
                     <p>
-                        @foreach($registro_pulsera as $registro)
+                        @foreach($registro_actual as $registro)
                             {{ $registro -> temperatura }} 
                         @endforeach
                     </p>
@@ -108,7 +108,7 @@
                 <div class = "col-sm-12 text-center">
                     <span>Pulso Cardiaco: </span>
                     <p>
-                        @foreach($registro_pulsera as $registro)
+                        @foreach($registro_actual as $registro)
                             {{ $registro -> pulso_cardiaco }}
                         @endforeach
                     </p>
@@ -117,7 +117,7 @@
                 <div class = "col-sm-12 text-center ">
                     <span>Oxigenacion en la sangre: </span>
                     <p>
-                        @foreach($registro_pulsera as $registro)
+                        @foreach($registro_actual as $registro)
                             {{ $registro -> oxigeno_sangre }}
                         @endforeach
                     </p>
@@ -274,8 +274,8 @@
                                     display: true,
                                     text: 'Oxigenacion en la sangre'
                                 },
-                                suggestedMin: 30,
-                                suggestedMax: 45,
+                                suggestedMin: 80,
+                                suggestedMax: 100,
                             },
                             x: {
                                 title: {
