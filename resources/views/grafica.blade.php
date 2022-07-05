@@ -8,6 +8,13 @@
             white-space: nowrap;
             overflow-y: hidden;
         }
+        .scroll-bar-gra{
+            scrollbar-width: none;
+            overflow-y: scroll;
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+        
     </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,18 +27,18 @@
     <title>Diseño</title>
 </head>
 <body>
-    <div class="row g-0" style="background-color: #FFCCCC; min-height: 657px ;">
-        <div class="col-sm-8" style="background-color: #CCFFE6;">
-            <div class="container" style="max-width: 500px; max-height: 500px;">
-                <canvas id="myChart" width="1000px" height="1000px"></canvas>
+    <div class="row g-0" style="background-color: #F3F3F3;">
+        <div class="row col-sm-8" style="background-color: #F3F3F3;">
+            <div class="container" style="max-width: 800px; max-height: 500px;">
+                <canvas id="myChart" width="800px" height="500px"></canvas>
             </div>
 
-            <div class="container" style="max-width: 500px; max-height: 500px;">
-                <canvas id="myChart2" width="600px" height="500px"></canvas>
+            <div class="container" style="max-width: 800px; max-height: 500px;">
+                <canvas id="myChart2" width="800px" height="500px"></canvas>
             </div>
 
-            <div class="container" style="max-width: 500px; max-height: 500px;">
-                <canvas id="myChart3" width="600px" height="500px"></canvas>
+            <div class="container" style="max-width: 800px; max-height: 500px;">
+                <canvas id="myChart3" width="800px" height="500px"></canvas>
             </div>
             <form action="{{ route('pacientes.index') }}">
                 <input type="submit" 
@@ -85,8 +92,8 @@
                     <form action=" {{ route('grafica.graficar_fecha', $datos) }} ">
                         @foreach($fechas as $fecha)
                             <input type="submit" 
-                                    class="btn btn-outline-success "
-                                    style="padding: 40px 20px;"
+                                    class="btn btn-light "
+                                    style="padding: 20px 10px; font-size: 10px"
                                     value=" {{ $fecha -> fecha }} "
                                     name = "fecha">
                             </input>
@@ -139,20 +146,10 @@
                             label: 'Temperatura',
                             data: cData.data_temperatura,
                             backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
+                                'rgba(99, 202, 167, 1)'
                             ],
                             borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                                'rgba(99, 202, 167, 1)'
                             ],
                             borderWidth: 1
                         }]
@@ -178,8 +175,10 @@
                             zoom: {
                                 zoom: {
                                     wheel: {
-                                        enabled: true
-                                    }
+                                        enabled: true,
+                                        speed: .02
+                                    },
+                                    mode: 'x'
                                 }
                             }
                         }
@@ -194,20 +193,10 @@
                             label: 'Pulso Cardiaco',
                             data: cData.data_pulso_cardiaco,
                             backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
+                                'rgba(99, 202, 167, 1)'
                             ],
                             borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                                'rgba(99, 202, 167, 1)'
                             ],
                             borderWidth: 1
                         }]
@@ -233,8 +222,10 @@
                             zoom: {
                                 zoom: {
                                     wheel: {
-                                        enabled: true
-                                    }
+                                        enabled: true,
+                                        speed: .02
+                                    },
+                                    mode: 'x'
                                 }
                             }
                         }
@@ -249,20 +240,10 @@
                             label: 'Oxigenacion en la sangre',
                             data: cData.data_oxi_sangre,
                             backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
+                                'rgba(99, 202, 167, 1)'
                             ],
                             borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
+                                'rgba(99, 202, 167, 1)'
                             ],
                             borderWidth: 1
                         }]
@@ -288,8 +269,10 @@
                             zoom: {
                                 zoom: {
                                     wheel: {
-                                        enabled: true
-                                    }
+                                        enabled: true,
+                                        speed: .02
+                                    },
+                                    mode: 'x'
                                 }
                             }
                         }
