@@ -36,9 +36,11 @@ Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->
 
 //Resource
 //Route::resource('/', PacientesController::class);
-
+//prubeas
 Route::get('vista', [RegistroPulserasController::class, 'vista']);
-Route::view('pruebas', 'mazer-main.src.index');
+//Route::view('pruebas', 'prueba');
+Route::get('pruebas', [PacientesController::class, 'paciente'])->name('pruebas.paciente');
+
 /*
 Route::get('eloquen', function(){
     $posts = Post::where('id','>=','20')

@@ -23,7 +23,7 @@ class Registro_pulseraFactory extends Factory
             'paciente_id' => $pul,
             'id_pulsera' => $id_pul,
             //'id_pulsera' => $this->faker->randomElement(['P001','P002','P003','P004','P005','P006','P007','P008']),
-            'fecha' => $this->faker->dateTimeBetween('-10 days', 'now'),
+            'fecha' => $this->faker->dateTimeBetween('-3 days', 'now'),
             'hora' => $this->faker->time('H:i'),
             'temperatura' => $this->faker->numberBetween(35,39)+$decimal/10,
             'pulso_cardiaco' => $this->faker->numberBetween(60,120),

@@ -49,7 +49,7 @@
                 </input>
             </form>
         </div>
-        <div class="col-sm-6 col-md-4 row g-0" style="background-color: #F3F3F3;">
+        <div class="row-cols-1-justify-content-start col-sm-6 col-md-4 row g-0" style="background-color: #F3F3F3;">
             <div class="container row g-0 " style="height: 30%;">
                 <div class="col-sm-4 align-items-center row">
                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"  width="80" height="100">
