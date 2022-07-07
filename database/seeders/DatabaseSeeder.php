@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         \App\Models\Paciente::factory(8)->create();
-        \App\Models\Registro_pulsera::factory(200)->create();
+        \App\Models\Registro_pulsera::factory(400)->create();
     }
 }
