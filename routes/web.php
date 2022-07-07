@@ -16,7 +16,7 @@ use App\Http\Controllers\RegistroPulserasController;
 */
 
 //Principal
-Route::get('/', [PacientesController::class, 'index'])->name('pacientes.index');
+Route::get('administrar_pacientes', [PacientesController::class, 'index'])->name('pacientes.index');
 
 //Editar Pacientes
 Route::get('pacientes/editar/{pacientes}',[PacientesController::class, 'editar'])->name('pacientes.editar');
@@ -39,7 +39,7 @@ Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->
 //prubeas
 Route::get('vista', [RegistroPulserasController::class, 'vista']);
 //Route::view('pruebas', 'prueba');
-Route::get('pruebas', [PacientesController::class, 'paciente'])->name('pruebas.paciente');
+Route::get('/', [PacientesController::class, 'paciente'])->name('pruebas.paciente');
 
 /*
 Route::get('eloquen', function(){

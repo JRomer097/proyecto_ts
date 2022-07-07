@@ -15,7 +15,7 @@
         <div class="navbar-collapse collapse show container-fluid" id="navbarNavAltMarkup" style="">
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="#">Pacientes</a>
-            <a class="nav-link" href="#">Administrar Pacientes</a>
+            <a class="nav-link" href="{{ route('pacientes.index') }}">Administrar pacientes</a>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
@@ -25,23 +25,31 @@
     </div>
 </nav>
 <body>
-    <div class="" style="background-color: #EDEAE5;">
-        <div class="row row-cols-auto text-center">
-            @php
-                $cont = 0
-            @endphp
-            @foreach($pacientes_inf as $paciente)
-                <div class="col-sm-4">
-                    {{ $paciente -> nombre }} 
+  <div style="background-color: #EDEAE5;">
+    <div class="container-sm p-4" style="background-color: #EDEAE5;">
+          <div class="row row-cols-auto text-center">
+              @foreach($id_pacientes as $paciente)
+                <div class="card mb-5 col-sm-4" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-sm-4 ali">
+                      <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" class="img-fluid rounded-end" alt="...">
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ $paciente->nombre }}</h5>
+                        <p class="card-text">pulso</p>
+                        <p class="card-text">temperatura</p>
+                        <p class="card-text">oxigeno en la sangre</p>
+                        <a href="{{ route('grafica.graficar', $paciente) }}"> graficas </a>
+                        <p class="card-text"><small class="text-muted">25 de julio</small></p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                @php $cont = $cont + 1 @endphp
-                @if($cont == 3)
-                    <div class="w-100"></div>
-                    @php $cont = 0 @endphp
-                @endif
-            @endforeach
-        </div>
-    </div>
+              @endforeach
+          </div>
+      </div>
+  </div>
 </body>
 </html>
 

@@ -40,7 +40,7 @@
             <div class="container" style="max-width: 800px; max-height: 500px;">
                 <canvas id="myChart3" width="800px" height="500px"></canvas>
             </div>
-            <form action="{{ route('pacientes.index') }}">
+            <form action="{{ route('pruebas.paciente') }}">
                 <input type="submit" 
                     class="btn btn-outline-success "
                     style="padding: 20px 10px;"

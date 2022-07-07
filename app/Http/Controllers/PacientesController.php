@@ -187,27 +187,32 @@ class PacientesController extends Controller
 
         public function paciente()
         {
-
             $id_pacientes = Paciente::select('id', 'nombre')->get();
-            
-
+            return view('prueba', [
+                'id_pacientes' => $id_pacientes
+            ]);
+            /*
             $fechas_actuales=[];
             $cont = 0;
             foreach($id_pacientes as $paciente)
             {
-                $fechas_actuales2 = Registro_pulsera::select('fecha')->where('paciente_id','=', $paciente->id )
+                $fechas_actual = Registro_pulsera::select('fecha')->where('paciente_id','=', $paciente->id )
                 ->groupBy('fecha')->orderBy('fecha', 'DESC')->limit(1)->get();
-                foreach($fechas_actuales2 as $algo){
-                    $fechas_actuales[$cont]['fecha'] = $algo -> fecha;
-                    $fechas_actuales[$cont]['paciente_id'] = $paciente->id;
+                foreach($fechas_actual as $fecha_act){
+                    $fechas_actuales[$cont]=[
+                        'fecha'=>$fecha_act->fecha,
+                        'paciente_id'=>$paciente->id
+                    ];
                     $cont = $cont + 1;
                 }
             }
-            
-            //dd($fechas_actuales);
+            $object_fechas_actuales = json_decode(json_encode($fechas_actuales), FALSE);
+            //$fechas_actuales['fechas_actuales'] = json_encode($fechas_actuales);
+            //$object = json_encode($id_pacientes);
+       
             $registros_actuales=[];
             $cont = 0;
-            foreach($fechas_actuales as $fecha)
+            foreach($object_fechas_actuales as $fecha)
             {
                 $registro_actual_subquery = Registro_pulsera::where('fecha','=', $fecha->fecha)
                 ->where('paciente_id','=',$fecha->paciente_id)->max('hora');
@@ -221,12 +226,12 @@ class PacientesController extends Controller
                     $registros_actuales[$cont]['fecha'] = $algo->fecha;
                     $registros_actuales[$cont]['hora'] = $algo -> hora;
                     $registros_actuales[$cont]['temperatura'] = $algo->temperatura;
-                    $registros_actuales[$cont]['pulso_Cardiaco'] = $algo->pulso_Cardiaco;
+                    $registros_actuales[$cont]['pulso_cardiaco'] = $algo->pulso_cardiaco;
                     $registros_actuales[$cont]['oxigeno_sangre'] = $algo->oxigeno_sangre;
                     $cont = $cont + 1;
                 }
             }
-            return($fechas_actuales);
+            $object_registros_actuales = json_decode(json_encode($registros_actuales), FALSE);*/
         }
     
 }
