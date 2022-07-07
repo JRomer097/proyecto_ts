@@ -19,7 +19,7 @@ class RegistroPulseras extends Migration
             $table->string('id_pulsera');
             $table->date('fecha');
             $table->string('hora')->nullable();
-            $table->double('temperatura');
+            $table->float('temperatura');
             $table->integer('pulso_cardiaco');
             $table->integer('oxigeno_sangre');
             $table->timestamps();

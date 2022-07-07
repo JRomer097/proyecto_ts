@@ -27,20 +27,20 @@
     <title>Diseño</title>
 </head>
 <body>
-    <div class="row g-0" style="background-color: #F3F3F3;">
-        <div class="row col-sm-8" style="background-color: #F3F3F3;">
-            <div class="container" style="max-width: 800px; max-height: 500px;">
+    <div class="row" style="background-color: #F3F3F3;">
+        <div class="row col-md-8" style="background-color: #F3F3F3;">
+            <div class="container p-4" style="max-width: 800px; max-height: 500px;">
                 <canvas id="myChart" width="800px" height="500px"></canvas>
             </div>
 
-            <div class="container" style="max-width: 800px; max-height: 500px;">
+            <div class="container p-4" style="max-width: 800px; max-height: 500px;">
                 <canvas id="myChart2" width="800px" height="500px"></canvas>
             </div>
 
-            <div class="container" style="max-width: 800px; max-height: 500px;">
+            <div class="container p-4" style="max-width: 800px; max-height: 500px;">
                 <canvas id="myChart3" width="800px" height="500px"></canvas>
             </div>
-            <form action="{{ route('pruebas.paciente') }}">
+            <form action="{{ route('pruebas.index') }}">
                 <input type="submit" 
                     class="btn btn-outline-success "
                     style="padding: 20px 10px;"
@@ -49,46 +49,41 @@
                 </input>
             </form>
         </div>
-        <div class="row-cols-1-justify-content-start col-sm-6 col-md-4 row g-0" style="background-color: #F3F3F3;">
-            <div class="container row g-0 " style="height: 30%;">
-                <div class="col-sm-4 align-items-center row">
-                   <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"  width="80" height="100">
+
+        <div class="col-md-4 row g-0" style="background-color: #F3F3F3;">
+            <div class="row p-4">
+                <div class="col-sm-4 align-items-center">
+                   <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"  width="80">
                 </div>
-                <div class="col-sm-8 row container">
-                    <div class="col-sm-8">
-                        <span>Nombre: </span>
+                <div class="col-sm-8">
+                    <div class="col">
+                        <p>Nombre: </p>
                         <p> {{ $datos->nombre }} </p>
                     </div>
-                    <!-- <div class="w-100"></div> --> 
-
+                    
                     <div class="row">
-                        <div class="col-sm-6">
-                            <span>Edad: </span>
+                        <div class="col">
+                            <p>Edad: </p>
                             <p> {{ $datos->edad }} </p>
                         </div>
-
-                        <div class="col-sm-6">
-                            <span>Sangre: </span>
+                        <div class="col">
+                            <p>Sangre: </p>
                             <p> {{ $datos->tipo_de_sangre }} </p>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col">
                             <span>Peso: </span>
                             <p> {{ $datos->peso }}kg</p>
                         </div>
-
-                        <div class="col-sm-6">
+                        <div class="col">
                             <span>Altura: </span>
                             <p> {{ $datos->altura }}m</p>
                         </div>
                     </div>
-                </div>
-                
-            </div>
-            <div class="container align-items-center p-2 scroll-bar" style="height: 20%;">
-                <div class="text-center">
+
+                    <div class="col-sm-12 scroll-bar">
                     <form action=" {{ route('grafica.graficar_fecha', $datos) }} ">
                         @foreach($fechas as $fecha)
                             <input type="submit" 
@@ -99,12 +94,14 @@
                             </input>
                         @endforeach
                     </form>
-
+                    </div>
                 </div>
+
             </div>
-            <div class="row container align-items-center" style="height: 50%;">
-                <div class = "col-sm-12 text-center">
-                    <span>Temperatura: </span>
+            
+            <div class="row align-items-center text-center">
+                <div class = "col">
+                    <p>Temperatura: </p>
                     <p>
                         @foreach($registro_actual as $registro)
                             {{ $registro -> temperatura }} 
@@ -112,8 +109,8 @@
                     </p>
 				</div>
 
-                <div class = "col-sm-12 text-center">
-                    <span>Pulso Cardiaco: </span>
+                <div class = "col">
+                    <p>Pulso Cardiaco: </p>
                     <p>
                         @foreach($registro_actual as $registro)
                             {{ $registro -> pulso_cardiaco }}
@@ -121,8 +118,8 @@
                     </p>
 				</div>
 
-                <div class = "col-sm-12 text-center ">
-                    <span>Oxigenacion en la sangre: </span>
+                <div class = "col ">
+                    <p>Oxigenacion en la sangre: </p>
                     <p>
                         @foreach($registro_actual as $registro)
                             {{ $registro -> oxigeno_sangre }}
