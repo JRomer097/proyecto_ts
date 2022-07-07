@@ -196,7 +196,10 @@ class PacientesController extends Controller
             return view('pacientes', [
                 'fechas_actuales' => $fechas_actuales 
             ]);
-
+            
+            /* SELECT paciente_id, MAX(fecha), MAX(hora), temperatura, pulso_cardiaco, oxigeno_sangre, pacientes.id, pacientes.nombre
+FROM registro_pulseras INNER JOIN pacientes ON registro_pulseras.paciente_id = pacientes.id
+GROUP BY paciente_id; */
             //return($fechas_actuales);
 
             //return($fechas_actual);
