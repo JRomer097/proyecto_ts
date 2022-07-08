@@ -187,103 +187,51 @@ class PacientesController extends Controller
         public function index()
         { 
             $id_pacientes = Paciente::select('id', 'nombre')->get();
-            
-            $fechas_actuales[0]['edad']= 0;
-            $fechas_actuales[0]['peso']= 1;
-            $fechas_actuales[1]['edad']= 0;
-            $fechas_actuales[1]['peso']= 1;
-            
-            return view('pacientes', [
-                'fechas_actuales' => $fechas_actuales 
-            ]);
-            
-            /* SELECT paciente_id, MAX(fecha), MAX(hora), temperatura, pulso_cardiaco, oxigeno_sangre, pacientes.id, pacientes.nombre
-FROM registro_pulseras INNER JOIN pacientes ON registro_pulseras.paciente_id = pacientes.id
-GROUP BY paciente_id; */
-            //return($fechas_actuales);
 
-            //return($fechas_actual);
-            /*foreach($id_pacientes as $paciente)
-            {
-                $fechas_actual = Registro_pulsera::select('fecha')->where('paciente_id','=', $paciente->id )
-                ->groupBy('fecha')->orderBy('fecha', 'DESC')->limit(1)->get();
-                foreach($fechas_actual as $fecha_act){
-                    $fechas_actuales[$cont]=[
-                        'fecha'=>$fecha_act->fecha,
-                        'paciente_id'=>$paciente->id
-                    ];
-                    $cont = $cont + 1;
-                }
-            }*/
-
-            //return view('pacientes', compact('fechas_actuales'));
-            //$object_fechas_actuales = json_decode(json_encode($fechas_actuales), FALSE);
-            //$fechas_actuales['fechas_actuales'] = json_encode($fechas_actuales);
-            //$object = json_encode($id_pacientes);
-       
-            /*$registros_actuales=[];
-            $cont = 0;
-            foreach($object_fechas_actuales as $fecha)
-            {
-                $registro_actual_subquery = Registro_pulsera::where('fecha','=', $fecha->fecha)
-                ->where('paciente_id','=',$fecha->paciente_id)->max('hora');
-
-                $registro_actual = Registro_pulsera::where('paciente_id','=', $fecha->paciente_id )
-                ->where('fecha','=', $fecha -> fecha)->where('hora', '=', $registro_actual_subquery)->get();
-                foreach($registro_actual as $algo){
-                    $registros_actuales[$cont]['id'] = $algo -> id;
-                    $registros_actuales[$cont]['paciente_id'] = $algo->paciente_id;
-                    $registros_actuales[$cont]['id_pulsera'] = $algo -> id_pulsera;
-                    $registros_actuales[$cont]['fecha'] = $algo->fecha;
-                    $registros_actuales[$cont]['hora'] = $algo -> hora;
-                    $registros_actuales[$cont]['temperatura'] = $algo->temperatura;
-                    $registros_actuales[$cont]['pulso_cardiaco'] = $algo->pulso_cardiaco;
-                    $registros_actuales[$cont]['oxigeno_sangre'] = $algo->oxigeno_sangre;
-                    $cont = $cont + 1;
-                }
+            $count = 0;
+            foreach ($id_pacientes as $id_paciente) {
+                $fecha_actual = Registro_pulsera::select('fecha')->where('paciente_id','=', $id_paciente -> id)
+                ->max('fecha');
+                $fechas_actuales[$count]=[
+                    'paciente_id' => $id_paciente -> id,
+                    'fecha' => $fecha_actual
+                ];
+                $count = $count + 1;
             }
-            $object_registros_actuales = json_decode(json_encode($registros_actuales), FALSE);*/
 
-            /*$registros_actuales=[];
-            $cont = 0;
-            foreach($object_fechas_actuales as $fecha)
-            {
-                $registro_actual_subquery = Registro_pulsera::where('fecha','=', $fecha->fecha)
-                ->where('paciente_id','=',$fecha->paciente_id)->max('hora');
+            for ($i=0; $i < count($fechas_actuales); $i++) { 
 
+                $registro_actual_subquery = Registro_pulsera::where('fecha','=', $fechas_actuales[$i]['fecha'])
+                ->where('paciente_id','=', $fechas_actuales[$i]['paciente_id'])->max('hora');
+                
                 $registro_actual = Registro_pulsera::select('paciente_id','fecha','hora','temperatura',
                 'pulso_cardiaco','oxigeno_sangre', 'pacientes.id', 'pacientes.nombre')
                 ->join('pacientes','pacientes.id','=','registro_pulseras.paciente_id')
-                ->where('hora','=', $registro_actual_subquery)->where('fecha','=', $fecha -> fecha)
-                ->where('paciente_id','=', $fecha->paciente_id )->get();
-
-                /*$registro_actual = Registro_pulsera::where('paciente_id','=', $fecha->paciente_id )
-                ->where('fecha','=', $fecha -> fecha)->where('hora', '=', $registro_actual_subquery)->get();
-
-                foreach($registro_actual as $algo){
-                    $registros_actuales[$cont]['paciente_id'] = $algo -> paciente_id;
-                    $registros_actuales[$cont]['fecha'] = $algo->fecha;
-                    $registros_actuales[$cont]['hora'] = $algo -> hora;
-                    $registros_actuales[$cont]['temperatura'] = $algo->temperatura;
-                    $registros_actuales[$cont]['pulso_cardiaco'] = $algo -> pulso_cardiaco;
-                    $registros_actuales[$cont]['oxigeno_sangre'] = $algo->oxigeno_sangre;
-                    $registros_actuales[$cont]['nombre'] = $algo->nombre;
-                    $cont = $cont + 1;
+                ->where('hora','=', $registro_actual_subquery)->where('fecha','=', $fechas_actuales[$i]['fecha'])
+                ->where('paciente_id','=', $fechas_actuales[$i]['paciente_id'])->get();
+                foreach($registro_actual as $registro)
+                {
+                    $fechas_actuales[$i]=[
+                        'paciente_id' => $fechas_actuales[$i]['paciente_id'],
+                        'nombre' => $registro -> nombre,
+                        'fecha' => $fechas_actuales[$i]['fecha'],
+                        'hora' => $registro_actual_subquery,
+                        'temperatura' => $registro -> temperatura,
+                        'pulso_cardiaco' => $registro -> pulso_cardiaco,
+                        'oxigeno_sangre' => $registro -> oxigeno_sangre
+                    ];
                 }
             }
             
-            $object_registros_actuales = json_decode(json_encode($registros_actuales), FALSE);*/
+            $count = count($fechas_actuales);
+            return view('pacientes',[
+                'fechas_actuales' => $fechas_actuales,
+                'count' => $count
+            ]);
 
-            /*$inner = Registro_pulsera::select('paciente_id','fecha','hora','temperatura',
-            'pulso_cardiaco','oxigeno_sangre', 'pacientes.id', 'pacientes.nombre')
-            ->join('pacientes','pacientes.id','=','registro_pulseras.paciente_id')
-            ->where('hora','=','07:54')->where('fecha','=','2022-07-06')
-            ->where('paciente_id','=', 1)->get();*/
-            //dd($object_registros_actuales);
-            /*return view('pacientes', [
-                'object_registros_actuales' => $object_registros_actuales
-            ]);*/
- 
+            /*SELECT paciente_id, MAX(fecha), MAX(hora), temperatura, pulso_cardiaco, oxigeno_sangre, pacientes.id, pacientes.nombre
+            FROM registro_pulseras INNER JOIN pacientes ON registro_pulseras.paciente_id = pacientes.id
+            GROUP BY paciente_id;*/
         }
     
 }
