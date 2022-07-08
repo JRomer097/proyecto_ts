@@ -1,3 +1,18 @@
 .card{
 	border-radius: 33px;
 }
+
+.navbar{
+	min-height: 75px;
+
+}
+
+.card-text{
+	font-family: "Lucida Sans Unicode";
+	font-size: 18px;
+}
+
+.card-title{
+	font-family: "Lucida Sans Unicode";
+	font-weight: bold;
+}
