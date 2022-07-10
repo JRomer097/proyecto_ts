@@ -38,7 +38,7 @@ Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->
 //Route::resource('/', PacientesController::class);
 //prubeas
 Route::get('vista', [RegistroPulserasController::class, 'vista']);
-//Route::view('pruebas', 'prueba');
+Route::view('pruebas', 'desing');
 Route::get('/', [PacientesController::class, 'index'])->name('pruebas.index');
 
 /*

@@ -8,7 +8,7 @@
     <title>Pagina Principal</title>
   </head>
 <body>
-  <nav class="navbar navbar-expand-lg" style="background-color: #8ae0db;">
+  <nav class="navbar navbar-expand-lg" style="background-color: #488A99;">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,20 +17,20 @@
         <a class="navbar-brand" href="#"><b>Hospital el Hospitalito</b></a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('pruebas.index') }}">Pacientes</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('pruebas.index') }}" style="font-size: 20px;">Pacientes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('pacientes.paciente') }}">Administrar pacientes</a>
+            <a class="nav-link" href="{{ route('pacientes.paciente') }}" style="font-size: 20px;">Administrar pacientes</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn" type="submit" style="background-color: #8c8c8c; color: white;">Buscar</button>
+          <button class="btn" type="submit" style="background-color: #DADADA; color: black;"><b>Buscar</b></button>
         </form>
       </div>
     </div>
   </nav>
-  <div style="background-color: #EDEAE5;">
+  <div style="background-color: #C0C1C7;">
     @yield('content')
   </div>
 </body>

@@ -1,5 +1,10 @@
-.card{
-	border-radius: 33px;
+#card-main{
+	border-radius: 40px;
+}
+#button-main{
+	background-color: #F0F1F5;
+	color: back; 
+	font-size: 18px;
 }
 
 .navbar{
@@ -15,4 +20,5 @@
 .card-title{
 	font-family: "Lucida Sans Unicode";
 	font-weight: bold;
+	font-size: 18px;
 }

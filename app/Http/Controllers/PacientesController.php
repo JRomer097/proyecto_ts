@@ -34,9 +34,25 @@ class PacientesController extends Controller
             //obtenemos la fecha mas actual al hacer la primera grafica de X paciente
             $registro_actual_subquery = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
             ->max('fecha');
+            //Maximo, Minimo y promedio de la temperatura
+            $temperatura_status = Registro_pulsera::selectRaw(
+                'MAX(temperatura) AS max_temp, paciente_id, MIN(temperatura) AS min_temp, TRUNCATE(AVG(temperatura), 2) AS avg_temp'
+            )
+            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();    
+            //Maximo, Minimo y promedio de la Frecuencia Cardiaca
+            $heart_status = Registro_pulsera::selectRaw(
+                'MAX(pulso_cardiaco) AS max_heart, paciente_id, MIN(pulso_cardiaco) AS min_heart, TRUNCATE(AVG(pulso_cardiaco), 2) AS avg_heart'
+            )
+            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            //Maximo, Minimo y promedio del oxigeno en la sangre
+            $blood_status = Registro_pulsera::selectRaw(
+                'MAX(oxigeno_sangre) AS max_blood, paciente_id, MIN(oxigeno_sangre) AS min_blood, TRUNCATE(AVG(oxigeno_sangre), 2) AS avg_blood'
+            )
+            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+
             //Registro mas actual del paciente
             $registro_actual = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
-            -> where('fecha','=',$registro_actual_subquery) -> orderBy('hora', 'DESC')->limit(1)-> get();
+            -> where('fecha','=', $registro_actual_subquery) -> orderBy('hora', 'DESC')->limit(1)-> get();
 
             //Consultas para el catalogo de fechas
             $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
@@ -64,15 +80,36 @@ class PacientesController extends Controller
               return view('grafica', $data_temp, [
                 'datos' => $datos,
                 'registro_actual' => $registro_actual,
-                'fechas' => $fechas
+                'fechas' => $fechas,
+                'temperatura_status' => $temperatura_status,
+                'heart_status' => $heart_status,
+                'blood_status' => $blood_status
             ]);
         }
 
         public function graficar_fecha(Request $request, Paciente $pacientes)
         {
+            //Maximo, Minimo y promedio de la temperatura
+            $temperatura_status = Registro_pulsera::selectRaw(
+                'MAX(temperatura) AS max_temp, paciente_id, MIN(temperatura) AS min_temp, TRUNCATE(AVG(temperatura), 2) AS avg_temp'
+            )
+            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+
+            //Maximo, Minimo y promedio de la Frecuencia Cardiaca
+            $heart_status = Registro_pulsera::selectRaw(
+                'MAX(pulso_cardiaco) AS max_heart, paciente_id, MIN(pulso_cardiaco) AS min_heart, TRUNCATE(AVG(pulso_cardiaco), 2) AS avg_heart'
+            )
+            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            //Maximo, Minimo y promedio del oxigeno en la sangre
+            $blood_status = Registro_pulsera::selectRaw(
+                'MAX(oxigeno_sangre) AS max_blood, paciente_id, MIN(oxigeno_sangre) AS min_blood, TRUNCATE(AVG(oxigeno_sangre), 2) AS avg_blood'
+            )
+            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+
+            //
             $datos = $pacientes;
-            $registro_actual = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
-            -> where('fecha','=',$request -> fecha) -> orderBy('hora', 'DESC')->limit(1)-> get();
+            $registro_actual = Registro_pulsera::where('paciente_id','=', $pacientes -> id)
+            -> where('fecha','=', $request -> fecha) -> orderBy('hora', 'DESC')->limit(1)-> get();
 
             //Consultas para las fechas
             $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
@@ -90,14 +127,15 @@ class PacientesController extends Controller
                 $data_temp['data_pulso_cardiaco'][] = $registro_temperatura->pulso_cardiaco;
                 $data_temp['data_oxi_sangre'][] = $registro_temperatura->oxigeno_sangre;
             }
-    
             $data_temp['data_temp'] = json_encode($data_temp);
 
-            //dd($registro_pulsera);
             return view('grafica', $data_temp, [
                 'datos' => $datos,
                 'registro_actual' => $registro_actual,
-                'fechas' => $fechas
+                'fechas' => $fechas,
+                'temperatura_status' => $temperatura_status,
+                'heart_status' => $heart_status,
+                'blood_status' => $blood_status
             ]);
         }
     

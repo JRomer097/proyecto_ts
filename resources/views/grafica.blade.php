@@ -19,9 +19,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js" integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<div class="row" style="background-color: #F3F3F3;">
+<div class="row" style="background-color: #C0C1C7;">
 
-    <div class="row col-md-8" style="background-color: #F3F3F3;">
+    <div class="row col-md-8" style="background-color: #C0C1C7;">
         <div class="container p-4" style="max-width: 800px; max-height: 500px;">
             <canvas id="myChart" width="800px" height="500px"></canvas>
         </div>
@@ -35,7 +35,7 @@
 
     <div class="col-sm-4 p-4">
 
-        <div class="card mb-3" style="background-color: #F3F3F3;">
+        <div class="card mb-3" style="background-color: #C0C1C7;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="{{ asset('images/user.png') }}" class="img-fluid rounded-start" width="80">
@@ -84,92 +84,104 @@
             </div>
         </div>
 
-        <div class="card mb-3" style="background-color: #F3F3F3;">
+        <div class="card mb-3" style="background-color: #C0C1C7;">
             <div class="row g-0">
                 <div class="col-sm-12">
+                @foreach($temperatura_status as $registro)
                     <div class="card-body">
                         <h5 class="card-title">Temperatura</h5>
                         <div class="row">
                             <div class="col">
-                                <p class="card-text">Minima </p>
-                                <p class="card-text"> ?? </p>
+                                <p class="card-text">Maxima</p>
+                                <p class="card-text">
+                                    {{ $registro -> max_temp }}°c
+                                </p>
                             </div>
                             <div class="col">
-                                <p class="card-text">Maxima </p>
-                                <p class="card-text"> ?? </p>
+                                <p class="card-text">Minima</p>
+                                <p class="card-text">
+                                    {{ $registro -> min_temp }}°c
+                                </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p class="card-text">Promedio: </p>
+                                <p class="card-text">Promedio</p>
                                 <p class="card-text">
-                                @foreach($registro_actual as $registro)
-                                    {{ $registro -> temperatura }} 
-                                @endforeach
+                                    {{ $registro -> avg_temp }}°c
                                 </p>
                             </div>
                         </div>
                     </div>
+                @endforeach
                 </div>
             </div>
         </div>
 
-        <div class="card mb-3" style="background-color: #F3F3F3;">
+        <div class="card mb-3" style="background-color: #C0C1C7;">
             <div class="row g-0">
                 <div class="col-sm-12">
+                @foreach($heart_status as $registro)
                     <div class="card-body">
                         <h5 class="card-title">Frecuencia Cardiaca</h5>
                         <div class="row">
                             <div class="col">
-                                <p class="card-text">Minima </p>
-                                <p class="card-text"> ?? </p>
+                                <p class="card-text">Maxima</p>
+                                <p class="card-text">
+                                    {{ $registro -> max_heart}} lpm 
+                                </p>
                             </div>
                             <div class="col">
-                                <p class="card-text">Maxima </p>
-                                <p class="card-text"> ?? </p>
+                                <p class="card-text">Minima</p>
+                                <p class="card-text">
+                                    {{ $registro -> min_heart }} lpm 
+                                </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p class="card-text">Promedio: </p>
+                                <p class="card-text">Promedio</p>
                                 <p class="card-text">
-                                @foreach($registro_actual as $registro)
-                                    {{ $registro -> pulso_cardiaco }} 
-                                @endforeach
+                                    {{ $registro -> avg_heart }} lpm 
                                 </p>
                             </div>
                         </div>
                     </div>
+                @endforeach
                 </div>
             </div>
         </div>
 
-        <div class="card mb-3" style="background-color: #F3F3F3;">
+        <div class="card mb-3" style="background-color: #C0C1C7;">
             <div class="row g-0">
                 <div class="col-sm-12">
+                @foreach($blood_status as $registro)
                     <div class="card-body">
                         <h5 class="card-title">Oxigeno en la sangre</h5>
                         <div class="row">
                             <div class="col">
-                                <p class="card-text">Minima </p>
-                                <p class="card-text"> ?? </p>
+                                <p class="card-text">Maxima</p>
+                                <p class="card-text">
+                                    {{ $registro -> max_bloodt}} Spo2
+                                </p>
                             </div>
                             <div class="col">
-                                <p class="card-text">Maxima </p>
-                                <p class="card-text"> ?? </p>
+                                <p class="card-text">Minima</p>
+                                <p class="card-text">
+                                    {{ $registro -> min_blood}} Spo2
+                                </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <p class="card-text">Promedio: </p>
                                 <p class="card-text">
-                                @foreach($registro_actual as $registro)
-                                    {{ $registro -> oxigeno_sangre }} 
-                                @endforeach
+                                    {{ $registro -> avg_blood}} Spo2
                                 </p>
                             </div>
                         </div>
                     </div>
+                @endforeach
                 </div>
             </div>
         </div>
@@ -220,8 +232,12 @@
                             enabled: true,
                             speed: .02
                         },
-                        mode: 'x'
+                        mode: 'x',
+                        pinch:{
+                        enabled: true
                     }
+                    }
+
                 }
             }
         }
