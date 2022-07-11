@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-<div class="container row">
+<div class="container">
     <div class="col-sm-2">
         <form action="{{ route('pacientes.update', $datos) }}">
             @method('PACTH')

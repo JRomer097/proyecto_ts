@@ -19,9 +19,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js" integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<div class="row" style="background-color: #a6abb9;">
+<div class="row" style="background-color: #f6f6f6;">
 
-    <div class="row col-md-8" style="background-color: #a6abb9;">
+    <div class="row col-md-8" style="background-color: #f6f6f6;">
         <div class="container p-4" style="max-width: 800px; max-height: 500px;">
             <canvas id="myChart" width="800px" height="500px"></canvas>
         </div>
@@ -35,7 +35,7 @@
 
     <div class="col-sm-4 p-4 text-center">
 
-        <div class="card mb-3" style="background-color: #278097;" id="card-main">
+        <div class="card mb-3" style="background-color: #a2b6ff;" id="card-main">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="{{ asset('images/user.png') }}" class="img-fluid rounded-start" width="80">
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <div class="card mb-3" style="background-color: #278097;" id="card-graph">
+        <div class="card mb-3" style="background-color: #a2b6ff;" id="card-graph">
             <div class="row g-0 align-items-center p-2" >
                 <div class="col-sm-4 text-center">
                     <img src="{{ asset('images/termometro.png') }}" width="30">
@@ -147,7 +147,7 @@
             </div>
         </div>
 
-        <div class="card mb-3" style="background-color: #278097;" id="card-graph">
+        <div class="card mb-3" style="background-color: #a2b6ff;" id="card-graph">
             <div class="row g-0 align-items-center p-2">
                 <div class="col-sm-4 text-center">
                     <img src="{{ asset('images/heart.png') }}" width="80">
@@ -211,7 +211,7 @@
             </div>
         </div>
 
-        <div class="card mb-3" style="background-color: #278097;" id="card-graph">
+        <div class="card mb-3" style="background-color: #a2b6ff;" id="card-graph">
         <div class="row g-0 align-items-center p-2" >
                 <div class="col-sm-4 text-center ">
                     <img src="{{ asset('images/oxigeno.png') }}" width="100">

@@ -20,7 +20,7 @@ class PacientesController extends Controller
         public function paciente()
         {
             $pacientes = Paciente::all();
-            return view('add_pacientes', [
+            return view('list_paciente', [
                 'pacientes' => $pacientes
             ]);
         }

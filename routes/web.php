@@ -17,6 +17,7 @@ use App\Http\Controllers\RegistroPulserasController;
 
 //Principal
 Route::get('administrar_pacientes', [PacientesController::class, 'paciente'])->name('pacientes.paciente');
+Route::view('agregar_paciente','add_pacientes')->name('pacientes.add_paciente');
 
 //Editar Pacientes
 Route::get('pacientes/editar/{pacientes}',[PacientesController::class, 'editar'])->name('pacientes.editar');

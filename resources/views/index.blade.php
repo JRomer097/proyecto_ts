@@ -8,7 +8,7 @@
     <title>Pagina Principal</title>
   </head>
 <body>
-  <nav class="navbar navbar-expand-lg" style="background-color: #07637a;" id="nav-tex">
+  <nav class="navbar navbar-expand-lg" style="background-color: #a2b6ff;" id="nav-tex">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@
       </div>
     </div>
   </nav>
-  <div style="background-color: #a6abb9;">
+  <div style="background-color: #f6f6f6;">
     @yield('content')
   </div>
 </body>

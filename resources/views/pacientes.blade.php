@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-<div class="container p-4" style="background-color: #a6abb9;">
+<div class="container p-4" style="background-color: #f6f6f6;">
   <div class="row text-center t-4 gx-3">
     @for($i=0; $i < $count ; $i++)
       <div class=" mb-5 col-sm-4">
