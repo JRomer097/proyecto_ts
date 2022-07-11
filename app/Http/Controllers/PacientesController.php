@@ -50,6 +50,12 @@ class PacientesController extends Controller
             )
             ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
 
+            if ($registro_actual_subquery == null) {
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+
             //Registro mas actual del paciente
             $registro_actual = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
             -> where('fecha','=', $registro_actual_subquery) -> orderBy('hora', 'DESC')->limit(1)-> get();
@@ -83,8 +89,10 @@ class PacientesController extends Controller
                 'fechas' => $fechas,
                 'temperatura_status' => $temperatura_status,
                 'heart_status' => $heart_status,
-                'blood_status' => $blood_status
+                'blood_status' => $blood_status,
+                'status' => $status
             ]);
+
         }
 
         public function graficar_fecha(Request $request, Paciente $pacientes)
