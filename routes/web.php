@@ -16,7 +16,12 @@ use App\Http\Controllers\RegistroPulserasController;
 */
 
 //Principal
+Route::get('/', [PacientesController::class, 'index'])->name('pruebas.index');
+
+//Administrar los pacientes
 Route::get('administrar_pacientes', [PacientesController::class, 'paciente'])->name('pacientes.paciente');
+
+//Agregar en nuevo paciente
 Route::view('agregar_paciente','add_pacientes')->name('pacientes.add_paciente');
 
 //Editar Pacientes
@@ -29,7 +34,7 @@ Route::get('pacientes/editar/informacion/{pacientes}', [PacientesController::cla
 Route::get('pacientes/graficar/{pacientes}',[PacientesController::class, 'graficar'])->name('grafica.graficar');
 Route::get('pacientes/graficar/fecha/{pacientes}',[PacientesController::class, 'graficar_fecha'])->name('grafica.graficar_fecha');
 
-//Guardar un nuevo paciente
+//Registart  un nuevo paciente
 Route::post('pacientes', [PacientesController::class, 'store'])->name('pacientes.store');
 
 //Borrar un paciente
@@ -37,18 +42,5 @@ Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->
 
 //Resource
 //Route::resource('/', PacientesController::class);
-//prubeas
-Route::get('vista', [RegistroPulserasController::class, 'vista']);
-Route::view('pruebas', 'desing');
-Route::get('/', [PacientesController::class, 'index'])->name('pruebas.index');
 
-/*
-Route::get('eloquen', function(){
-    $posts = Post::where('id','>=','20')
-    ->orderBy('id','desc')
-    ->take(3)
-    ->get();
-    foreach($posts as $post){
-        echo "$post->id $post->title <br>";
-    }
-});*/
+

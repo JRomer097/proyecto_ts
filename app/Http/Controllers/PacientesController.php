@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Registro_pulsera;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class PacientesController extends Controller
@@ -64,6 +64,10 @@ class PacientesController extends Controller
             $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
             -> groupBy('fecha') -> get();
 
+            $fechas_day = Registro_pulsera::selectRaw('fecha, EXTRACT(DAY FROM fecha) as dia')
+            ->where('paciente_id','=',  $pacientes -> id)
+            -> groupBy('fecha') -> get();
+            
 
             $registro = Registro_pulsera::where(
                 'paciente_id', '=', $pacientes -> id)
@@ -86,6 +90,7 @@ class PacientesController extends Controller
               return view('grafica', $data_temp, [
                 'datos' => $datos,
                 'registro_actual' => $registro_actual,
+                'fechas_day' => $fechas_day,
                 'fechas' => $fechas,
                 'temperatura_status' => $temperatura_status,
                 'heart_status' => $heart_status,
@@ -97,6 +102,10 @@ class PacientesController extends Controller
 
         public function graficar_fecha(Request $request, Paciente $pacientes)
         {
+            //Buscamos si hay registros en la fecha seleccionada
+            $registro_actual_subquery = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
+            -> where('fecha','=', $request -> fecha)->get();
+            
             //Maximo, Minimo y promedio de la temperatura
             $temperatura_status = Registro_pulsera::selectRaw(
                 'MAX(temperatura) AS max_temp, paciente_id, MIN(temperatura) AS min_temp, TRUNCATE(AVG(temperatura), 2) AS avg_temp'
@@ -113,6 +122,12 @@ class PacientesController extends Controller
                 'MAX(oxigeno_sangre) AS max_blood, paciente_id, MIN(oxigeno_sangre) AS min_blood, TRUNCATE(AVG(oxigeno_sangre), 2) AS avg_blood'
             )
             ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            
+            if ($registro_actual_subquery == null) {
+                $status = 0;
+            }else{
+                $status = 1;
+            }
 
             //
             $datos = $pacientes;
@@ -121,6 +136,10 @@ class PacientesController extends Controller
 
             //Consultas para las fechas
             $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
+            -> groupBy('fecha') -> get();
+
+            $fechas_day = Registro_pulsera::selectRaw('fecha, EXTRACT(DAY FROM fecha) as dia')
+            ->where('paciente_id','=',  $pacientes -> id)
             -> groupBy('fecha') -> get();
 
             $registro = Registro_pulsera::where(
@@ -136,14 +155,16 @@ class PacientesController extends Controller
                 $data_temp['data_oxi_sangre'][] = $registro_temperatura->oxigeno_sangre;
             }
             $data_temp['data_temp'] = json_encode($data_temp);
-
+            
             return view('grafica', $data_temp, [
                 'datos' => $datos,
                 'registro_actual' => $registro_actual,
                 'fechas' => $fechas,
+                'fechas_day' => $fechas_day,
                 'temperatura_status' => $temperatura_status,
                 'heart_status' => $heart_status,
-                'blood_status' => $blood_status
+                'blood_status' => $blood_status,
+                'status' => $status
             ]);
         }
     
@@ -223,12 +244,12 @@ class PacientesController extends Controller
                 $count = 1;
                 $fechas_actuales[0]=[
                     'paciente_id' => 0,
-                    'nombre' => "no hay",
+                    'nombre' => "??",
                     'fecha' => "xxxx-xx-xx",
                     'hora' => "xx:xx",
-                    'temperatura' => "sin registro",
-                    'pulso_cardiaco' => "sin registro",
-                    'oxigeno_sangre' => "sin registro"
+                    'temperatura' => "??",
+                    'pulso_cardiaco' => "??",
+                    'oxigeno_sangre' => "??"
                 ];
                 return view('pacientes',[
                     'fechas_actuales' => $fechas_actuales,
@@ -243,7 +264,7 @@ class PacientesController extends Controller
                 if ($fecha_actual == null) {
                     $fechas_actuales[$count]=[
                         'paciente_id' => $id_paciente -> id,
-                        'fecha' => "sin registro"
+                        'fecha' => "??"
                     ];
                 }else{
                     $fechas_actuales[$count]=[
@@ -255,7 +276,7 @@ class PacientesController extends Controller
             }
 
             for ($i=0; $i < count($fechas_actuales); $i++) {
-                if ($fechas_actuales[$i]['fecha'] == "sin registro") {
+                if ($fechas_actuales[$i]['fecha'] == "??") {
                     $paciente_nombre = Paciente::select('nombre')->where('id','=', $fechas_actuales[$i]['paciente_id'])->get();
                     foreach ($paciente_nombre as $paciente) {
                         $fechas_actuales[$i]=[
@@ -263,9 +284,9 @@ class PacientesController extends Controller
                             'nombre' => $paciente->nombre,
                             'fecha' => "xxxx-xx-xx",
                             'hora' => "xx:xx",
-                            'temperatura' => "sin registro",
-                            'pulso_cardiaco' => "sin registro",
-                            'oxigeno_sangre' => "sin registro"
+                            'temperatura' => "??",
+                            'pulso_cardiaco' => "??",
+                            'oxigeno_sangre' => "??"
                         ];
                     }
                 }else{

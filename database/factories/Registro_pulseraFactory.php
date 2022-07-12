@@ -15,19 +15,19 @@ class Registro_pulseraFactory extends Factory
      */
     public function definition()
     {
-        $decimal = 1/$this->faker->numberBetween(1,10);
-        $pul = rand(1,8);
+        $decimal = 1 / $this->faker->numberBetween(1, 10);
+        $pul = rand(1, 8);
         $id_pul = "P00$pul";
         return [
             //'paciente_id' =>rand(1,8),
             'paciente_id' => $pul,
             'id_pulsera' => $id_pul,
             //'id_pulsera' => $this->faker->randomElement(['P001','P002','P003','P004','P005','P006','P007','P008']),
-            'fecha' => $this->faker->dateTimeBetween('-3 days', 'now'),
+            'fecha' => $this->faker->dateTimeBetween('-2 days', 'now'),
             'hora' => $this->faker->time('H:i'),
-            'temperatura' => $this->faker->numberBetween(35,37)+$decimal,
-            'pulso_cardiaco' => $this->faker->numberBetween(60,120),
-            'oxigeno_sangre' => $this->faker->numberBetween(90,100)
+            'temperatura' => $this->faker->numberBetween(35, 37) + $decimal,
+            'pulso_cardiaco' => $this->faker->numberBetween(60, 120),
+            'oxigeno_sangre' => $this->faker->numberBetween(90, 100)
         ];
     }
 }

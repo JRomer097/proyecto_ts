@@ -1,19 +1,12 @@
 @extends('index')
 @section('content')
 <style>
-    .scroll-bar{
+    .scroll-bar {
         scrollbar-width: none;
         overflow-x: scroll;
         white-space: nowrap;
         overflow-y: hidden;
     }
-    .scroll-bar-gra{
-        scrollbar-width: none;
-        overflow-y: scroll;
-        white-space: nowrap;
-        overflow-x: hidden;
-    }
-    
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js" integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -43,48 +36,45 @@
                 <div class="col-md-8">
                     <div class="card-body text-sm-start">
                         <h5 class="card-title">{{ $datos->nombre }}</h5>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="card-text" style="margin:0;"><b>Edad</b></p>
-                                    <p class="card-text" > {{ $datos->edad }} </p>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text" style="margin:0;"><b>Sangre</b></p>
-                                    <p class="card-text"> {{ $datos->tipo_de_sangre }} </p>
-                                </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="card-text" style="margin:0;"><b>Edad</b></p>
+                                <p class="card-text"> {{ $datos->edad }} </p>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="card-text" style="margin:0;"><b>Peso</b></p>
-                                    <p class="card-text"> {{ $datos->peso }}kg</p>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text" style="margin:0;"><b>Altura</b></p>
-                                    <p class="card-text"> {{ $datos->altura }}m</p>
-                                </div>
+                            <div class="col">
+                                <p class="card-text" style="margin:0;"><b>Sangre</b></p>
+                                <p class="card-text"> {{ $datos->tipo_de_sangre }} </p>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="card-text" style="margin:0;"><b>Peso</b></p>
+                                <p class="card-text"> {{ $datos->peso }}kg</p>
+                            </div>
+                            <div class="col">
+                                <p class="card-text" style="margin:0;"><b>Altura</b></p>
+                                <p class="card-text"> {{ $datos->altura }}m</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-sm text-center pb-4 p-4">
-            <div class="col-sm-12 scroll-bar">
-                <form action=" {{ route('grafica.graficar_fecha', $datos) }} ">
-                    @foreach($fechas as $fecha)
-                        <input type="submit" 
-                                class="btn btn-light "
-                                style="padding: 20px 10px; font-size: 10px"
-                                value=" {{ $fecha -> fecha }} "
-                                name = "fecha">
-                        </input>
-                    @endforeach
-                </form>
-            </div>
+
+        <div class="scroll-bar p-4">
+            <form action=" {{ route('grafica.graficar_fecha', $datos) }} ">
+                @foreach($fechas_day as $fecha)
+                <button type="submit" class="btn btn-dark btn_graficas" value=" {{ $fecha -> fecha }} " name="fecha">
+                    {{ $fecha -> dia }}
+                </button>
+                @endforeach
+            </form>
         </div>
 
+
         <div class="card mb-3" style="background-color: #a2b6ff;" id="card-graph">
-            <div class="row g-0 align-items-center p-2" >
+            <div class="row g-0 align-items-center p-2">
                 <div class="col-sm-4 text-center">
                     <img src="{{ asset('images/termometro.png') }}" width="30">
                 </div>
@@ -160,13 +150,13 @@
                             <div class="col">
                                 <p class="card-text" style="margin:0;"><b>Maxima</b></p>
                                 <p class="card-text">
-                                    ?? lpm 
+                                    ?? lpm
                                 </p>
                             </div>
                             <div class="col">
                                 <p class="card-text" style="margin:0;"><b>Minima</b></p>
                                 <p class="card-text">
-                                    ?? lpm 
+                                    ?? lpm
                                 </p>
                             </div>
                         </div>
@@ -174,7 +164,7 @@
                             <div class="col">
                                 <p class="card-text" style="margin:0;"><b>Promedio</b></p>
                                 <p class="card-text">
-                                    ?? lpm 
+                                    ?? lpm
                                 </p>
                             </div>
                         </div>
@@ -187,13 +177,13 @@
                             <div class="col">
                                 <p class="card-text" style="margin:0;"><b>Maxima</b></p>
                                 <p class="card-text">
-                                    {{ $registro -> max_heart }} lpm 
+                                    {{ $registro -> max_heart }} lpm
                                 </p>
                             </div>
                             <div class="col">
                                 <p class="card-text" style="margin:0;"><b>Minima</b></p>
                                 <p class="card-text">
-                                    {{ $registro -> min_heart }} lpm 
+                                    {{ $registro -> min_heart }} lpm
                                 </p>
                             </div>
                         </div>
@@ -201,7 +191,7 @@
                             <div class="col">
                                 <p class="card-text" style="margin:0;"><b>Promedio</b></p>
                                 <p class="card-text">
-                                    {{ $registro -> avg_heart }} lpm 
+                                    {{ $registro -> avg_heart }} lpm
                                 </p>
                             </div>
                         </div>
@@ -212,7 +202,7 @@
         </div>
 
         <div class="card mb-3" style="background-color: #a2b6ff;" id="card-graph">
-        <div class="row g-0 align-items-center p-2" >
+            <div class="row g-0 align-items-center p-2">
                 <div class="col-sm-4 text-center ">
                     <img src="{{ asset('images/oxigeno.png') }}" width="100">
                 </div>
@@ -322,9 +312,9 @@
                             speed: .02
                         },
                         mode: 'x',
-                        pinch:{
-                        enabled: true
-                    }
+                        pinch: {
+                            enabled: true
+                        }
                     }
 
                 }

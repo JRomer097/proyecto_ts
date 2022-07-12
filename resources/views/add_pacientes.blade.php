@@ -53,18 +53,7 @@
                         <option value="B-">B-</option>
                         <option value="AB+">AB+</option>
                         <option value="AB-">AB-</option>
-
-                        <!--<option value="O+">O+</option>
-                        <option value="O+-">O-</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>-->
-
                     </select>
-                    <!--old('tipo_de_sangre') -->
                     <div class="form-text text-danger" id="tipo_de_sangre"></div>
                 </div>
                 <div class="mb-3">

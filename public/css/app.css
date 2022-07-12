@@ -16,6 +16,13 @@
 	/*height: 100%;*/
 }
 
+.btn_graficas{
+	border-radius: 20px;
+	font-size: 30px;
+	width: 60px;
+	height: 80px;
+}
+
 .navbar{
 	min-height: 75px;
 
