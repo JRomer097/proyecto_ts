@@ -179,7 +179,7 @@ class PacientesController extends Controller
                 'nombre' => 'required',
                 'apellido_paterno' => 'required',
                 'apellido_materno' => 'required',
-                'edad' => 'required|numeric|min:3',
+                'fecha_nacimiento' => 'required',
                 'peso' =>'required',
                 'altura' => 'required',
                 'tipo_de_sangre' => 'required|min:2'
@@ -187,24 +187,25 @@ class PacientesController extends Controller
             ],  ['nombre.required'=>'Necesito un nombre', 
                 'apellido_paterno.required'=>'Necesito un apellido paterno',
                 'apellido_materno.required'=>'Necesito un apellido materno',
-                'edad.required'=>'Necesito una edad',
+                'fecha_nacimiento.required'=>'Necesito una fecha',
                 'peso.required'=>'Necesito un peso',
                 'altura.required'=>'Necesito la altura',
                 'tipo_de_sangre.required'=>'Necesito el tipo de sangre']
             );
-    
+            
             //Guardamos la informción del nuevo paciente al validarlo
             Paciente::create([
                 'nombre' => $request -> nombre,
                 'apellido_paterno' => $request -> apellido_paterno,
                 'apellido_materno' => $request -> apellido_materno,
-                'edad' => $request -> edad,
+                'fecha_nacimiento' => $request -> fecha_nacimiento,
                 'peso' => $request -> peso,
                 'altura' => $request -> altura,
                 'tipo_de_sangre' => $request -> tipo_de_sangre
             ]);
             //$update_id_paciente = DB::select('CALL actualizar_id_pacientePersonalizado()');
-            return back();
+            DB::unprepared('CALL calcular_edad()');
+            return redirect() -> route('pacientes.paciente');
         }
     
         //Borra la informacion del paciente

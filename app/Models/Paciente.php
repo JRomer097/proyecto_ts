@@ -18,7 +18,7 @@ class Paciente extends Model
         'nombre',
         'apellido_paterno',
         'apellido_materno',
-        'edad',
+        'fecha_nacimiento',
         'peso',
         'altura',
         'tipo_de_sangre'

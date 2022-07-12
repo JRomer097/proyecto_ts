@@ -19,6 +19,7 @@ class PacienteFactory extends Factory
             'apellido_paterno' => $this->faker->firstName(),
             'apellido_materno' => $this->faker->lastName(),
             'edad' => $this->faker->numberBetween(18,60),
+            'fecha_nacimiento' => $this->faker->date(),
             'peso' => $this->faker->numberBetween(500,1200)/10,
             'altura'=> $this->faker->numberBetween(15, 19)/10, 
             'tipo_de_sangre' => $this->faker->randomElement(['A+','A-','O+','O-'])

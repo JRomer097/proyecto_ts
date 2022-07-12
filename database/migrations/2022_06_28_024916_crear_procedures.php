@@ -13,7 +13,7 @@ class CrearProcedures extends Migration
      */
     public function up()
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS actualizar_id_pacientePersonalizado;
+        DB::unprepared('DROP PROCEDURE IF EXISTS calcular_edad;
                         DROP PROCEDURE IF EXISTS llenar_hora;');
         DB::unprepared('CREATE PROCEDURE llenar_hora()  
         BEGIN
@@ -54,26 +54,24 @@ class CrearProcedures extends Migration
             SET contador = contador + 1;
     END WHILE;
 END');
-        DB::unprepared('CREATE PROCEDURE actualizar_id_pacientePersonalizado(
+        DB::unprepared('CREATE PROCEDURE calcular_edad(
             )
             BEGIN
-              DECLARE contador_inicio INT(10);
-              DECLARE contador_c INT(10);
-              DECLARE id_personalizada VARCHAR(50);
-              DECLARE id_pacienteRegistro VARCHAR(50);
-              DECLARE id_registro INT(10);
-              DECLARE id_nada VARCHAR(50);
-              SELECT COUNT(id) FROM pacientes WHERE id_paciente IS NULL INTO contador_inicio;
-              SET contador_c = 0;
-                IF (contador_inicio > 0 ) THEN
-                  WHILE (contador_c <= contador_inicio) DO
-                    SELECT id, id_paciente FROM pacientes WHERE id_paciente IS NULL LIMIT 1 INTO id_registro, id_pacienteRegistro;
-                    SET id_personalizada = (SELECT id_pacientePersonalizada FROM id_generados_pacientes WHERE id_pacienteFk = id_registro);
-                    UPDATE pacientes SET id_paciente = id_personalizada WHERE id = id_registro;
-                    SET contador_c = contador_c + 1;
-                  END WHILE;
-                END IF;
-                END');
+            DECLARE contador_inicio INT(10);
+            DECLARE contador_c INT(10);
+            DECLARE edad_cal INT(50);
+            DECLARE id_registro INT(10);
+            SELECT COUNT(id) FROM pacientes WHERE edad IS NULL INTO contador_inicio;
+            SET contador_c = 0;
+            IF (contador_inicio > 0 ) THEN
+                WHILE (contador_c <= contador_inicio) DO
+                SELECT id FROM pacientes WHERE edad IS NULL LIMIT 1 INTO id_registro;
+                SET edad_cal = (SELECT TIMESTAMPDIFF(YEAR ,fecha_nacimiento, NOW()) AS edad FROM pacientes WHERE id = id_registro);
+                UPDATE pacientes SET edad = edad_cal WHERE id = id_registro;
+                SET contador_c = contador_c + 1;
+                END WHILE;
+            END IF;
+            END');
         
     }
 

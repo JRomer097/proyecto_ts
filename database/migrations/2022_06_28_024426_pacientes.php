@@ -18,7 +18,8 @@ class Pacientes extends Migration
             $table->string('nombre', 50);
             $table->string('apellido_paterno', 50);
             $table->string('apellido_materno', 50);
-            $table->integer('edad');
+            $table->date('fecha_nacimiento');
+            $table->integer('edad')->nullable();
             $table->double('peso', 3);
             $table->double('altura', 1);
             $table->string('tipo_de_sangre', 50);
