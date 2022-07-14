@@ -35,20 +35,20 @@
                         <td> {{$pas->altura}}m </td>
                         <td> {{$pas->tipo_de_sangre}} </td>
                         <td>
-                            <form class="pt-1" action=" {{ route('pacientes.delete', $pas) }}" method ="POST">
+                            <form class="pt-1" action=" {{ route('pacientes.destroy', $pas) }}" method ="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input  type="submit" 
                                         value="Borrar" 
                                         class="btn btn-secondary btn-sm btn-table"
-                                        onclick = "return confirm('¿Desea Eliminar al paciente {{$pas->nombre}}?')">
+                                        onclick = "return confirm('¿Desea Eliminar al paciente {{$pas->id}}?')">
                             </form>
                             <form class="pt-1" action="{{ route('grafica.graficar', $pas) }}" method="POST"> <!-- route('grafica.graficar'), $pas -->
                                 @method('GET')
                                 @csrf
                                 <input type="submit" value="Graficar" class="btn btn-secondary btn-sm btn-table">
                             </form>
-                            <form class="pt-1" action="{{ route('pacientes.editar', $pas) }}" method="POST"> <!-- route('grafica.graficar'), $pas -->
+                            <form class="pt-1" action="{{ route('pacientes.edit', $pas) }}" method="POST"> <!-- route('grafica.graficar'), $pas -->
                                 @method('GET')
                                 @csrf
                                 <input type="submit" value="editar" class="btn btn-secondary btn-sm btn-table">

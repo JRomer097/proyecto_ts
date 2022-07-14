@@ -1,12 +1,12 @@
 @extends('index')
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <div>
     <div class="row">
         <div class="col-sm-4 max-auto container p-4">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                    <input autocomplete="off" class="form-control" name="fecha_nacimiento" placeholder="YYYY-MM-DD" type="text"/>
+                    <input autocomplete="off" class="form-control" name="fecha_nacimiento" placeholder="YYYY-MM-DD" type="text" />
                     <div class="form-text text-danger" id="fecha_nacimiento"></div>
                 </div>
                 <div class="mb-3">
@@ -79,16 +79,16 @@
 @endif
 
 <script>
-    $(document).ready(function(){
-      var date_input=$('input[name="fecha_nacimiento"]'); 
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'yyyy-mm-dd',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
+    $(document).ready(function() {
+        var date_input = $('input[name="fecha_nacimiento"]');
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        var options = {
+            format: 'yyyy-mm-dd',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        };
+        date_input.datepicker(options);
     })
 </script>
 

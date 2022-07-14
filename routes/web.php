@@ -16,7 +16,7 @@ use App\Http\Controllers\RegistroPulserasController;
 */
 
 //Principal
-Route::get('/', [PacientesController::class, 'index'])->name('pruebas.index');
+//Route::get('/', [PacientesController::class, 'index'])->name('pruebas.index');
 
 //Administrar los pacientes
 Route::get('administrar_pacientes', [PacientesController::class, 'paciente'])->name('pacientes.paciente');
@@ -25,22 +25,28 @@ Route::get('administrar_pacientes', [PacientesController::class, 'paciente'])->n
 Route::view('agregar_paciente','add_pacientes')->name('pacientes.add_paciente');
 
 //Editar Pacientes
-Route::get('pacientes/editar/{pacientes}',[PacientesController::class, 'editar'])->name('pacientes.editar');
+//Route::get('pacientes/editar/{pacientes}',[PacientesController::class, 'editar'])->name('pacientes.editar');
 
 //Actualiza la informacion del paciente
-Route::get('pacientes/editar/informacion/{pacientes}', [PacientesController::class, 'update'])->name('pacientes.update');
+//Route::get('pacientes/editar/informacion/{pacientes}', [PacientesController::class, 'update'])->name('pacientes.update');
 
 //Ventana de gráficas
 Route::get('pacientes/graficar/{pacientes}',[PacientesController::class, 'graficar'])->name('grafica.graficar');
 Route::get('pacientes/graficar/fecha/{pacientes}',[PacientesController::class, 'graficar_fecha'])->name('grafica.graficar_fecha');
 
 //Registart  un nuevo paciente
-Route::post('pacientes', [PacientesController::class, 'store'])->name('pacientes.store');
+//Route::post('pacientes', [PacientesController::class, 'store'])->name('pacientes.store');
 
 //Borrar un paciente
-Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->name('pacientes.delete');
+//Route::delete('pacientes/{pacientes}', [PacientesController::class, 'delete'])->name('pacientes.delete');
 
 //Resource
 //Route::resource('/', PacientesController::class);
+
+Route::get('/', function () {
+    return redirect()->route('pacientes.index');
+});
+
+Route::resource('pacientes', 'App\Http\Controllers\PacientesController');
 
 

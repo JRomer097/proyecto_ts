@@ -169,7 +169,7 @@ class PacientesController extends Controller
         }
     
         //Ventana para editar los datos del paciente
-        public function editar($pacientes)
+        public function edit($pacientes)
         {
             $datos = Paciente::find($pacientes);
             return view('Editar', [
@@ -189,7 +189,6 @@ class PacientesController extends Controller
             $paciente->altura = $request ->altura;
             $paciente->tipo_de_sangre = $request ->tipo_de_sangre;
             $paciente -> save();
-            return redirect() -> route('pacientes.paciente');
         }
     
         //Guarda la informacion del nuevo paciente
@@ -230,9 +229,10 @@ class PacientesController extends Controller
         }
     
         //Borra la informacion del paciente
-        public function delete(Paciente $pacientes)
+        public function destroy(Paciente $pacientes)
         {
-            $pacientes ->delete();
+            dd($pacientes);
+            $pacientes -> delete();
             return back();
         }
 
@@ -325,4 +325,7 @@ class PacientesController extends Controller
             GROUP BY paciente_id;*/
         }
     
+    public function show(){
+        return redirect() -> route('pacientes.paciente');
+    }
 }

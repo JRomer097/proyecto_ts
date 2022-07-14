@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,184 +13,186 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js" integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Graficas</title>
 </head>
+
 <body>
     <div class="container" style="max-width: 800px; max-height: 800px;">
-            <canvas id="myChart" width="600" height="500"></canvas>
+        <canvas id="myChart" width="600" height="500"></canvas>
     </div>
     <div class="container" style="max-width: 800px; max-height: 800px;">
-            <canvas id="myChart2" width="600" height="500"></canvas>
+        <canvas id="myChart2" width="600" height="500"></canvas>
     </div>
     <div class="container" style="max-width: 800px; max-height: 800px;">
-            <canvas id="myChart3" width="600" height="500"></canvas>
+        <canvas id="myChart3" width="600" height="500"></canvas>
     </div>
-    
+
 </body>
+
 </html>
 <script>
-                var cData = JSON.parse(`<?php echo $data_temp ?>`)
-                const ctx = document.getElementById('myChart').getContext('2d');
-                const chartTemperatura = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: cData.label_hora,
-                        datasets: [{
-                            label: 'Temperatura',
-                            data: cData.data_temperatura,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
+    var cData = JSON.parse(`<?php echo $data_temp ?>`)
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const chartTemperatura = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: cData.label_hora,
+            datasets: [{
+                label: 'Temperatura',
+                data: cData.data_temperatura,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Temperatura'
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Temperatura'
-                                },
-                                suggestedMin: 30,
-                                suggestedMax: 45,
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Horas'
-                                }
-                            }
-                        },
-                        plugins: {
-                            zoom: {
-                                zoom: {
-                                    wheel: {
-                                        enabled: true
-                                    }
-                                }
-                            }
+                    suggestedMin: 30,
+                    suggestedMax: 45,
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Horas'
+                    }
+                }
+            },
+            plugins: {
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true
                         }
                     }
-                });
-                const ctx2 = document.getElementById('myChart2').getContext('2d');
-                const chartTemperatura2 = new Chart(ctx2, {
-                    type: 'line',
-                    data: {
-                        labels: cData.label_hora,
-                        datasets: [{
-                            label: 'Pulso Cardiaco',
-                            data: cData.data_pulso_cardiaco,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
+                }
+            }
+        }
+    });
+    const ctx2 = document.getElementById('myChart2').getContext('2d');
+    const chartTemperatura2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: cData.label_hora,
+            datasets: [{
+                label: 'Pulso Cardiaco',
+                data: cData.data_pulso_cardiaco,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Pulso Cardiaco'
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Pulso Cardiaco'
-                                },
-                                suggestedMin: 30,
-                                suggestedMax: 45,
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Horas'
-                                }
-                            }
-                        },
-                        plugins: {
-                            zoom: {
-                                zoom: {
-                                    wheel: {
-                                        enabled: true
-                                    }
-                                }
-                            }
+                    suggestedMin: 30,
+                    suggestedMax: 45,
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Horas'
+                    }
+                }
+            },
+            plugins: {
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true
                         }
                     }
-                });
-                const ctx3 = document.getElementById('myChart3').getContext('2d');
-                const chartTemperatura3 = new Chart(ctx3, {
-                    type: 'line',
-                    data: {
-                        labels: cData.label_hora,
-                        datasets: [{
-                            label: 'Oxigenacion en la sangre',
-                            data: cData.data_oxi_sangre,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
+                }
+            }
+        }
+    });
+    const ctx3 = document.getElementById('myChart3').getContext('2d');
+    const chartTemperatura3 = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: cData.label_hora,
+            datasets: [{
+                label: 'Oxigenacion en la sangre',
+                data: cData.data_oxi_sangre,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Oxigenacion en la sangre'
                     },
-                    options: {
-                        scales: {
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'Oxigenacion en la sangre'
-                                },
-                                suggestedMin: 30,
-                                suggestedMax: 45,
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Horas'
-                                }
-                            }
-                        },
-                        plugins: {
-                            zoom: {
-                                zoom: {
-                                    wheel: {
-                                        enabled: true
-                                    }
-                                }
-                            }
+                    suggestedMin: 30,
+                    suggestedMax: 45,
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Horas'
+                    }
+                }
+            },
+            plugins: {
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true
                         }
                     }
-                });
-    </script>
+                }
+            }
+        }
+    });
+</script>

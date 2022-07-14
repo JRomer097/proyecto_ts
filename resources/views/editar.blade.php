@@ -38,7 +38,7 @@
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Tipo de sangre</label>
                     <select class="form-select" name="tipo_de_sangre" id="tipo_de_sangre" type="text">
-                        <option value="{{ $datos->tipo_de_sangre }}"selected>{{ $datos->tipo_de_sangre }}</option>
+                        <option value="{{ $datos->tipo_de_sangre }}" selected>{{ $datos->tipo_de_sangre }}</option>
                         <option value="O+">O+</option>
                         <option value="O+-">O-</option>
                         <option value="A+">A+</option>
@@ -52,9 +52,7 @@
                 </div>
                 <div class="mb-3">
                     @csrf
-                    <button type="submit" 
-                            class="btn btn-primary" 
-                            onclick = "return confirm('¿Desea modificar esta información?')">Guardar</button>
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('¿Desea modificar esta información?')">Guardar</button>
                 </div>
             </form>
         </div>
