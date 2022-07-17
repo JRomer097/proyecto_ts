@@ -44,7 +44,7 @@
                 </div>
                 <div class="row p-4">
                   <div class="col">
-                    <a href="{{ route('grafica.graficar', $fechas_actuales[$i]['paciente_id']) }}" 
+                    <a href="{{ route('pacientes.graficar', $fechas_actuales[$i]['paciente_id']) }}" 
                     class="btn" 
                     id="button-main">
                     <b> Gráficas </b>

@@ -30,6 +30,16 @@ class CrearTriggers extends Migration
                 INSERT INTO id_generados_pacientes(id_pacientePersonalizada, id_pacienteFk) VALUES(CONCAT("P",new.id),new.id);
             END IF;
         END');
+
+        DB::unprepared('
+        CREATE TRIGGER borrar_registro_pulsera
+        BEFORE DELETE
+        ON pacientes
+        FOR EACH ROW
+           BEGIN
+                DELETE FROM registro_pulseras WHERE paciente_id = old.id;
+           END'
+        );
     }
 
     /**
@@ -40,5 +50,6 @@ class CrearTriggers extends Migration
     public function down()
     {
         DB::unprepared('DROP TRIGGER IF EXISTS crear_id_pulsera');
+        DB::unprepared('DROP TRIGGER IF EXISTS borrar_registro_pulsera');
     }
 }

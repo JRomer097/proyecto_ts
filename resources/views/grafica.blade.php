@@ -63,8 +63,10 @@
 
 
         <div class="scroll-bar p-4">
-            <form action=" {{ route('grafica.graficar_fecha', $datos) }} ">
+            <form action=" {{ route('pacientes.graficar_fecha', $datos) }}" method="POST">
                 @foreach($fechas_day as $fecha)
+                @csrf
+                @method('GET')
                 <button type="submit" class="btn btn-dark btn_graficas" value=" {{ $fecha -> fecha }} " name="fecha">
                     {{ $fecha -> dia }}
                 </button>

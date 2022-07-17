@@ -25,30 +25,30 @@
                 </thead>
                 <tbody>
                 <tbody>
-                    @foreach ($pacientes as $pas)
+                    @foreach ($pacientes as $paciente)
                     <tr>
-                        <td> {{$pas->nombre}} </td>
-                        <td> {{$pas->apellido_paterno}} </td>
-                        <td> {{$pas->apellido_materno}} </td>
-                        <td> {{$pas->edad}} </td>
-                        <td> {{$pas->peso}}kg </td>
-                        <td> {{$pas->altura}}m </td>
-                        <td> {{$pas->tipo_de_sangre}} </td>
+                        <td> {{$paciente->nombre}} </td>
+                        <td> {{$paciente->apellido_paterno}} </td>
+                        <td> {{$paciente->apellido_materno}} </td>
+                        <td> {{$paciente->edad}} </td>
+                        <td> {{$paciente->peso}}kg </td>
+                        <td> {{$paciente->altura}}m </td>
+                        <td> {{$paciente->tipo_de_sangre}} </td>
                         <td>
-                            <form class="pt-1" action=" {{ route('pacientes.destroy', $pas) }}" method ="POST">
+                            <form class="pt-1" action=" {{ route('pacientes.destroy', $paciente) }}" method ="POST">
                                 @method('DELETE')
                                 @csrf
                                 <input  type="submit" 
                                         value="Borrar" 
                                         class="btn btn-secondary btn-sm btn-table"
-                                        onclick = "return confirm('¿Desea Eliminar al paciente {{$pas->id}}?')">
+                                        onclick = "return confirm('¿Desea Eliminar al paciente {{ $paciente->nombre }}?')">
                             </form>
-                            <form class="pt-1" action="{{ route('grafica.graficar', $pas) }}" method="POST"> <!-- route('grafica.graficar'), $pas -->
+                            <form class="pt-1" action="{{ route('pacientes.graficar', $paciente) }}" method="POST"> 
                                 @method('GET')
                                 @csrf
                                 <input type="submit" value="Graficar" class="btn btn-secondary btn-sm btn-table">
                             </form>
-                            <form class="pt-1" action="{{ route('pacientes.edit', $pas) }}" method="POST"> <!-- route('grafica.graficar'), $pas -->
+                            <form class="pt-1" action="{{ route('pacientes.edit', $paciente) }}" method="POST">
                                 @method('GET')
                                 @csrf
                                 <input type="submit" value="editar" class="btn btn-secondary btn-sm btn-table">

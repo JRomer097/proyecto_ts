@@ -17,7 +17,7 @@ class PacientesController extends Controller
         }
 
         //Mandamos y mostramos la información de la DB
-        public function paciente()
+        public function list_paciente()
         {
             $pacientes = Paciente::all();
             return view('list_paciente', [
@@ -26,29 +26,29 @@ class PacientesController extends Controller
         }
     
         //Ventana para graficar la informacion del paciente
-        public function graficar(Paciente $pacientes)
+        public function graficar(Paciente $paciente)
         {
             //datos de x paciente
-            $datos = $pacientes;
+            $datos = $paciente;
 
             //obtenemos la fecha mas actual al hacer la primera grafica de X paciente
-            $registro_actual_subquery = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
+            $registro_actual_subquery = Registro_pulsera::where('paciente_id','=',$paciente -> id)
             ->max('fecha');
             //Maximo, Minimo y promedio de la temperatura
             $temperatura_status = Registro_pulsera::selectRaw(
                 'MAX(temperatura) AS max_temp, paciente_id, MIN(temperatura) AS min_temp, TRUNCATE(AVG(temperatura), 2) AS avg_temp'
             )
-            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();    
+            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $paciente -> id)->groupBy('paciente_id')->get();    
             //Maximo, Minimo y promedio de la Frecuencia Cardiaca
             $heart_status = Registro_pulsera::selectRaw(
                 'MAX(pulso_cardiaco) AS max_heart, paciente_id, MIN(pulso_cardiaco) AS min_heart, TRUNCATE(AVG(pulso_cardiaco), 2) AS avg_heart'
             )
-            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $paciente -> id)->groupBy('paciente_id')->get();
             //Maximo, Minimo y promedio del oxigeno en la sangre
             $blood_status = Registro_pulsera::selectRaw(
                 'MAX(oxigeno_sangre) AS max_blood, paciente_id, MIN(oxigeno_sangre) AS min_blood, TRUNCATE(AVG(oxigeno_sangre), 2) AS avg_blood'
             )
-            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            ->where('fecha', '=', $registro_actual_subquery)->where('paciente_id','=', $paciente -> id)->groupBy('paciente_id')->get();
 
             if ($registro_actual_subquery == null) {
                 $status = 0;
@@ -57,20 +57,20 @@ class PacientesController extends Controller
             }
 
             //Registro mas actual del paciente
-            $registro_actual = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
+            $registro_actual = Registro_pulsera::where('paciente_id','=',$paciente -> id)
             -> where('fecha','=', $registro_actual_subquery) -> orderBy('hora', 'DESC')->limit(1)-> get();
 
             //Consultas para el catalogo de fechas
-            $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
+            $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $paciente -> id)
             -> groupBy('fecha') -> get();
 
             $fechas_day = Registro_pulsera::selectRaw('fecha, EXTRACT(DAY FROM fecha) as dia')
-            ->where('paciente_id','=',  $pacientes -> id)
+            ->where('paciente_id','=',  $paciente -> id)
             -> groupBy('fecha') -> get();
             
 
             $registro = Registro_pulsera::where(
-                'paciente_id', '=', $pacientes -> id)
+                'paciente_id', '=', $paciente -> id)
                 ->where('fecha','=', $registro_actual_subquery) ->orderBy('hora', 'ASC') ->get();
      
     
@@ -100,28 +100,28 @@ class PacientesController extends Controller
 
         }
 
-        public function graficar_fecha(Request $request, Paciente $pacientes)
+        public function graficar_fecha(Request $request, Paciente $paciente)
         {
             //Buscamos si hay registros en la fecha seleccionada
-            $registro_actual_subquery = Registro_pulsera::where('paciente_id','=',$pacientes -> id)
+            $registro_actual_subquery = Registro_pulsera::where('paciente_id','=',$paciente -> id)
             -> where('fecha','=', $request -> fecha)->get();
             
             //Maximo, Minimo y promedio de la temperatura
             $temperatura_status = Registro_pulsera::selectRaw(
                 'MAX(temperatura) AS max_temp, paciente_id, MIN(temperatura) AS min_temp, TRUNCATE(AVG(temperatura), 2) AS avg_temp'
             )
-            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $paciente -> id)->groupBy('paciente_id')->get();
 
             //Maximo, Minimo y promedio de la Frecuencia Cardiaca
             $heart_status = Registro_pulsera::selectRaw(
                 'MAX(pulso_cardiaco) AS max_heart, paciente_id, MIN(pulso_cardiaco) AS min_heart, TRUNCATE(AVG(pulso_cardiaco), 2) AS avg_heart'
             )
-            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $paciente -> id)->groupBy('paciente_id')->get();
             //Maximo, Minimo y promedio del oxigeno en la sangre
             $blood_status = Registro_pulsera::selectRaw(
                 'MAX(oxigeno_sangre) AS max_blood, paciente_id, MIN(oxigeno_sangre) AS min_blood, TRUNCATE(AVG(oxigeno_sangre), 2) AS avg_blood'
             )
-            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $pacientes -> id)->groupBy('paciente_id')->get();
+            ->where('fecha', '=', $request -> fecha)->where('paciente_id','=', $paciente -> id)->groupBy('paciente_id')->get();
             
             if ($registro_actual_subquery == null) {
                 $status = 0;
@@ -130,20 +130,20 @@ class PacientesController extends Controller
             }
 
             //
-            $datos = $pacientes;
-            $registro_actual = Registro_pulsera::where('paciente_id','=', $pacientes -> id)
+            $datos = $paciente;
+            $registro_actual = Registro_pulsera::where('paciente_id','=', $paciente -> id)
             -> where('fecha','=', $request -> fecha) -> orderBy('hora', 'DESC')->limit(1)-> get();
 
             //Consultas para las fechas
-            $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $pacientes -> id)
+            $fechas = Registro_pulsera::select('fecha')->where('paciente_id','=',  $paciente -> id)
             -> groupBy('fecha') -> get();
 
             $fechas_day = Registro_pulsera::selectRaw('fecha, EXTRACT(DAY FROM fecha) as dia')
-            ->where('paciente_id','=',  $pacientes -> id)
+            ->where('paciente_id','=',  $paciente -> id)
             -> groupBy('fecha') -> get();
 
             $registro = Registro_pulsera::where(
-                'paciente_id', '=', $pacientes -> id)
+                'paciente_id', '=', $paciente -> id)
                 ->where('fecha','=', $request -> fecha) ->orderBy('hora', 'ASC') ->get();
     
             $data_temp = [];
@@ -169,26 +169,28 @@ class PacientesController extends Controller
         }
     
         //Ventana para editar los datos del paciente
-        public function edit($pacientes)
+        public function edit(Paciente $paciente)
         {
-            $datos = Paciente::find($pacientes);
             return view('Editar', [
-                'datos' => $datos
+                'paciente' => $paciente
             ]);
         }
     
         //Actualizar la informacion del paciente
-        public function update(Request $request, $pacientes)
+        public function update(Request $request, Paciente $paciente)
         {
-            $paciente = Paciente::find($pacientes);
-            $paciente->nombre = $request ->nombre;
-            $paciente->apellido_paterno = $request ->apellido_paterno;
-            $paciente->apellido_materno = $request ->apellido_materno;
-            $paciente->edad = $request ->edad;
-            $paciente->peso = $request ->peso;
-            $paciente->altura = $request ->altura;
-            $paciente->tipo_de_sangre = $request ->tipo_de_sangre;
-            $paciente -> save();
+            $update_paciente = Paciente::find($paciente -> id);
+            $update_paciente->nombre = $request -> nombre;
+            $update_paciente->apellido_paterno = $request -> apellido_paterno;
+            $update_paciente->apellido_materno = $request -> apellido_materno;
+            $update_paciente->fecha_nacimiento = $request -> fecha_nacimiento;
+            $update_paciente->peso = $request -> peso;
+            $update_paciente->altura = $request -> altura;
+            $update_paciente->tipo_de_sangre = $request -> tipo_de_sangre;
+            //$paciente -> update($request -> all());
+            $update_paciente -> save();
+            DB::unprepared('CALL calcular_edad()');
+            return redirect() -> route('pacientes.list_paciente');
         }
     
         //Guarda la informacion del nuevo paciente
@@ -223,16 +225,14 @@ class PacientesController extends Controller
                 'altura' => $request -> altura,
                 'tipo_de_sangre' => $request -> tipo_de_sangre
             ]);
-            //$update_id_paciente = DB::select('CALL actualizar_id_pacientePersonalizado()');
             DB::unprepared('CALL calcular_edad()');
             return redirect() -> route('pacientes.paciente');
         }
     
         //Borra la informacion del paciente
-        public function destroy(Paciente $pacientes)
+        public function destroy(Paciente $paciente)
         {
-            dd($pacientes);
-            $pacientes -> delete();
+            $paciente -> delete();
             return back();
         }
 
@@ -325,7 +325,7 @@ class PacientesController extends Controller
             GROUP BY paciente_id;*/
         }
     
-    public function show(){
-        return redirect() -> route('pacientes.paciente');
-    }
+    /*public function show(){
+        return redirect() -> route('pacientes.list_paciente');
+    }*/
 }

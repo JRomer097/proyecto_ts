@@ -20,7 +20,7 @@
             <a class="nav-link active" id="nav-tex" href="{{ route('pacientes.index') }}" style="font-size: 20px;">Pacientes</a>
           </li>
           <li class="nav-item"> 
-            <a class="nav-link active" id="nav-tex" href="{{ route('pacientes.paciente') }}" style="font-size: 20px;">Administrar pacientes</a>
+            <a class="nav-link active" id="nav-tex" href="{{ route('pacientes.list_paciente') }}" style="font-size: 20px;">Administrar pacientes</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
