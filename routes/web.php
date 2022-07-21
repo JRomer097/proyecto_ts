@@ -50,3 +50,7 @@ Route::get('/', function () {
 Route::resource('pacientes', 'App\Http\Controllers\PacientesController') -> except('show');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
