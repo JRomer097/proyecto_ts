@@ -1,4 +1,4 @@
-@extends('index')
+@extends('layouts.app')
 @section('content')
 <div class="container p-4" style="background-color: #f6f6f6;">
   <div class="row text-center t-4 gx-3">

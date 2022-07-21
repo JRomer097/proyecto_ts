@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         \App\Models\Paciente::factory(8)->create();
         \App\Models\Registro_pulsera::factory(250)->create();
+        \App\Models\User::create([
+            'name'      =>  'Jose Romero',
+            'email'     =>  'jose@gmail.com',
+            'password'  =>  bcrypt('123456')
+        ]);
     }
 }
