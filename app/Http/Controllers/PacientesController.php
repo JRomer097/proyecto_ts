@@ -319,13 +319,5 @@ class PacientesController extends Controller
                 'fechas_actuales' => $fechas_actuales,
                 'count' => $count
             ]);
-
-            /*SELECT paciente_id, MAX(fecha), MAX(hora), temperatura, pulso_cardiaco, oxigeno_sangre, pacientes.id, pacientes.nombre
-            FROM registro_pulseras INNER JOIN pacientes ON registro_pulseras.paciente_id = pacientes.id
-            GROUP BY paciente_id;*/
         }
-    
-    /*public function show(){
-        return redirect() -> route('pacientes.list_paciente');
-    }*/
 }
