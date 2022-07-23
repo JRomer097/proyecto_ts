@@ -31,7 +31,7 @@
                         <td> {{$paciente->nombre}} </td>
                         <td> {{$paciente->apellido_paterno}} </td>
                         <td> {{$paciente->apellido_materno}} </td>
-                        <td> {{$paciente->edad}} </td>
+                        <td> {{$paciente->edad}} años</td>
                         <td> {{$paciente->peso}}kg </td>
                         <td> {{$paciente->altura}}m </td>
                         <td> {{$paciente->tipo_de_sangre}} </td>

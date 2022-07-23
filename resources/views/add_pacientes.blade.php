@@ -13,37 +13,58 @@
         <div class="col-sm-4 max-auto container p-4">
             <form action=" {{ route('pacientes.store') }} " method="POST">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                    <input class="form-control" name="nombre" value="{{ old('nombre') }}">
+                    <label for="exampleInputEmail1" class="form-label"> 
+                        <b>Nombre</b> 
+                        <i class="text-danger">*</i> 
+                    </label>
+                    <input class="form-control" name="nombre" value="{{ old('nombre') }}" autocomplete="off">
                     <div class="form-text text-danger" id="nombre"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Apellido Paterno</label>
-                    <input class="form-control" name="apellido_paterno" value="{{ old('apellido_paterno') }}">
+                    <label for="exampleInputEmail1" class="form-label"> 
+                        <b>Apellido Paterno</b> 
+                        <i class="text-danger">*</i> 
+                    </label>
+                    <input class="form-control" name="apellido_paterno" value="{{ old('apellido_paterno') }}" autocomplete="off">
                     <div class="form-text text-danger" id="apellido_paterno"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Apellido Materno</label>
-                    <input class="form-control" name="apellido_materno" value="{{ old('apellido_materno') }}">
+                    <label for="exampleInputEmail1" class="form-label"> 
+                        <b>Apellido Materno</b> 
+                        <i class="text-danger">*</i> 
+                    </label>
+                    <input class="form-control" name="apellido_materno" value="{{ old('apellido_materno') }}" autocomplete="off">
                     <div class="form-text text-danger" id="apellido_materno"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Fecha</label>
+                    <label for="exampleInputEmail1" class="form-label"> 
+                        <b>Fecha</b> 
+                        <i class="text-danger">*</i> 
+                    </label>
                     <input autocomplete="off" class="form-control" name="fecha_nacimiento" placeholder="YYYY-MM-DD" type="text" />
                     <div class="form-text text-danger" id="fecha_nacimiento"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Peso</label>
-                    <input class="form-control" name="peso" value="{{ old('peso') }}">
+                    <label for="exampleInputEmail1" class="form-label">
+                        <b>Peso</b>
+                        <i class="text-danger">*</i>
+                    </label>
+                    <input class="form-control" name="peso" value="{{ old('peso') }}" autocomplete="off">
                     <div class="form-text text-danger" id="peso"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Altura</label>
-                    <input class="form-control" name="altura" value="{{ old('altura') }}">
+                    <label for="exampleInputEmail1" class="form-label">
+                        <b>Altura</b>
+                        <i class="text-danger">*</i>
+                    </label>
+                    <input class="form-control" name="altura" value="{{ old('altura') }}" autocomplete="off">
                     <div class="form-text text-danger" id="altura"></div>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Tipo de sangre</label>
+                    <label for="exampleInputEmail1" class="form-label">
+                        <b>Tipo de sangre</b>
+                        <i class="text-danger">*</i>
+                    </label>
                     <select class="form-select" name="tipo_de_sangre" type="text">
                         <option selected></option>
                         <option value="O+">O+</option>
@@ -55,7 +76,6 @@
                         <option value="AB+">AB+</option>
                         <option value="AB-">AB-</option>
                     </select>
-                    <div class="form-text text-danger" id="tipo_de_sangre"></div>
                 </div>
                 <div class="mb-3">
                     @csrf

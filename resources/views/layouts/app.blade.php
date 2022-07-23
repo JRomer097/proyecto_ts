@@ -1,3 +1,8 @@
+<style>
+    #CamColor:hover{
+        font-weight: bold;
+}
+</style>
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -20,8 +25,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body style="background-color: #dfd9d9;">
+    <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #a2b6ff;">
             <div class="container">
                 <a class="navbar-brand"  href="{{ route('home') }}">
@@ -36,14 +41,14 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             @if(auth()->user()->rol_id == 1 or auth()->user()->rol_id == 2 or auth()->user()->rol_id == 3)
-                                <li class="nav-item">
+                                <li class="nav-item" id="CamColor">
                                     <a class="nav-link active" href="{{ route('pacientes.index') }}" class="nav-link">
                                         Pacientes
                                     </a>
                                 </li>
                             @endif
                             @if(auth()->user()->rol_id == 1 or auth()->user()->rol_id == 2)
-                                <li class="nav-item">
+                                <li class="nav-item" id="CamColor">
                                     <a class="nav-link active" href="{{ route('pacientes.list_paciente') }}" class="nav-link">
                                         Administrar Pacientes
                                     </a>
@@ -67,14 +72,16 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    <b>
+                                        {{ Auth::user()->name }}
+                                    </b>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar sesión') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

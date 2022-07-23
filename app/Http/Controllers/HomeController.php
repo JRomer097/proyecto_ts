@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RolUser;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //$now = Carbon::now();
+        $nowDate = Carbon::now()->setTimezone('America/Cancun')->format('d/m/Y h:i');
+        return view('home',[
+            'nowDate' => $nowDate,
+        ]);
     }
 }

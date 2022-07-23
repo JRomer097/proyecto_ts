@@ -226,7 +226,7 @@ class PacientesController extends Controller
                 'tipo_de_sangre' => $request -> tipo_de_sangre
             ]);
             DB::unprepared('CALL calcular_edad()');
-            return redirect() -> route('pacientes.paciente');
+            return redirect() -> route('pacientes.list_paciente');
         }
     
         //Borra la informacion del paciente
