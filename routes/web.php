@@ -57,6 +57,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('pacientes', 'App\Http\Controllers\PacientesController') -> middleware('auth') -> except('show');
 
+//Route::get('user', [RolUserController::class, 'user_rol']) -> middleware('auth')->name('user.user_rol');
+
 /*Route::prefix('/pacientes')->name('pacientes.')->group(function() {
     Route::get('/administrar_pacientes', [PacientesController::class, 'list_paciente'])->name('list_paciente')->middleware('auth');
     Route::view('/agregar_paciente','add_pacientes')->name('add_paciente')->middleware('auth');

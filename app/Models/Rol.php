@@ -8,10 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Rol extends Model
 {
     use HasFactory;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'rol_id'
+    ];
 
-    public function rols()
+    public function users()
     {
-        return $this-> hasMany(RolUser::class);
+        return $this-> beLongsTo(User::class);
     }
     
 }

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@if(auth()->user()->rol_id == 1 or auth()->user()->rol_id == 2)
 <div>
     <div class="row">
         <div class="col-sm-10 max_auto container">
@@ -61,4 +62,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

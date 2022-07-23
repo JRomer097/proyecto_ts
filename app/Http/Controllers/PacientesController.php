@@ -236,8 +236,14 @@ class PacientesController extends Controller
             return back();
         }
 
-        public function index()
-        { 
+            /**
+     * Obtiene el recurso de articulos con paginacion para tablas
+     * 
+     * @param   \Illuminate\Http\Request    $request
+     * @param   \Illuminate\Http\Response
+     */
+        public function index(Request $request)
+        {
             $id_pacientes = Paciente::select('id', 'nombre')->get();
             $count = count($id_pacientes);
             if ($count < 1) {
